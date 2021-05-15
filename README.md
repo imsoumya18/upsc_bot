@@ -1,8 +1,13 @@
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
 # Discord bot for daily The Hindu newspaper
-<p>**TO BE HONEST,** I've built this bot primarily for my own need.</p>
-<p>**HOWEVER,** if you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you may also download the PDF of the newspaper by visiting some websites. Why waste time searching on Google? Here is a quick solution.</p>
+<p>
+  **TO BE HONEST,** I've built this bot primarily for my own need.
+</p>
+
+<p>
+  **HOWEVER,** if you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you may also download the PDF of the newspaper by visiting some websites. Why waste time searching on Google? Here is a quick solution.
+</p>
 
 **JUST ADD THIS BOT TO YOUR SERVER & VOILA!!😎**
 
