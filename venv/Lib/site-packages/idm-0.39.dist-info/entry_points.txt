@@ -1,3 +1,0 @@
-[console_scripts]
-idm = idm.__main__:usage
-
