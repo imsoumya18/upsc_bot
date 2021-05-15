@@ -1,4 +1,4 @@
-<img src="https://github.com/imsoumya18/newspaper_bot/blob/main/assets/UPSC.jpg" alt="UPSC Logo" width="356" height="272">
+<img src="https://github.com/imsoumya18/newspaper_bot/blob/main/assets/UPSC.jpg" alt="UPSC Logo" width="356" height="272" class='center'>
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
@@ -22,3 +22,11 @@ In case of any problem mail me: <a href="mailto:soumyadeep184@gmail.com">soumyad
 
 
 ![forthebadge hosted-on-heroku](https://img.shields.io/badge/HOSTED_ON-HEROKU-brightgreen)
+
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
