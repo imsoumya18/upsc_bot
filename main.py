@@ -1,6 +1,5 @@
 import discord
 import requests
-import os
 from bs4 import BeautifulSoup
 
 client = discord.Client()
@@ -20,4 +19,4 @@ async def on_message(message):
         await message.channel.send('Today\'s The Hindu:\n' + url.get('href'))
 
 
-client.run(os.getenv('TOKEN'))
+client.run('TOKEN')
