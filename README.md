@@ -2,7 +2,7 @@
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
-# Discord bot for daily The Hindu newspaper
+# Discord Bot for Daily The Hindu newspaper
 <p>
   <b>TO BE HONEST,</b> I've built this bot primarily for my own need.
 </p>
