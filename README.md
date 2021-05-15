@@ -1,3 +1,5 @@
+<img src="asstes/UPSC.jpg" alt="UPSC Logo" width="500" height="600">
+
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
 # Discord bot for daily The Hindu newspaper
