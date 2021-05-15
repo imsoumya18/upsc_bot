@@ -12,7 +12,7 @@
 **JUST ADD THIS BOT TO YOUR SERVER & VOILA!!😎**
 
 To add the bot to your server,
-<a href="https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=2148001856&scope=bot" target="_blank">click here.</a>
+<a href="https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=2148001856&scope=bot">click here.</a>
 
 In case of any problem mail me: <a href="mailto:soumyadeep184@gmail.com">soumyadeep184@gmail.com</a> 
 
