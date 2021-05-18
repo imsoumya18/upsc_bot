@@ -12,11 +12,16 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content == 'newspaper':
+    if message.content.lower() == '--help':
+        embedparam = discord.Embed(title='--help', description='Get help', color=0x0addd7)
+        embedparam.add_field(name="--hindu", value="Get daily The Hindu newspaper PDF", inline=False)
+        await message.channel.send(embed=embedparam)
+    elif message.content.lower() == '--hindu':
         res = requests.get('https://www.visioniascurrentaffairs.com')
         soup = BeautifulSoup(res.text, 'html.parser')
         url = soup.find("a", attrs={"class": "green"})
-        await message.channel.send('Today\'s The Hindu:\n' + url.get('href'))
+        embedparam = discord.Embed(title=url.getText(), description=url.get('href'), color=0x0addd7)
+        await message.channel.send(embed=embedparam)
 
 
 client.run('TOKEN')
