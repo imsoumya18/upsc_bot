@@ -11,7 +11,8 @@
   <b>HOWEVER,</b> if you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you may also download the PDF of the newspaper by visiting some websites. Why waste time searching on Google? Here is a quick solution.
 </p>
 
-**JUST ADD THIS BOT TO YOUR SERVER & TYPE 'newspaper'. VOILA!!😎**
+**JUST ADD THIS BOT TO YOUR SERVER & TYPE '--hindu'. VOILA!!😎**
+Type '--help' for help
 
 To add the bot to your server,
 <a href="https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=2148001856&scope=bot">click here.</a>
