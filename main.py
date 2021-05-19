@@ -2,8 +2,8 @@ import discord
 import requests
 from bs4 import BeautifulSoup
 
-TOKEN = 'TOKEN(str)'
-OWN_ID = 'YOUR ID(int)'
+TOKEN = 'TOKEN(str)'               # Replace with your token
+OWN_ID = 'YOUR ID(int)'            # Replace with your own id
 
 bot = discord.Client()
 
