@@ -4,7 +4,7 @@
 
 # Discord Bot for Daily The Hindu Newspaper PDF
 <p>
-  <b>TO BE HONEST,</b> I've built this bot primarily for my own need.
+  <b>TO BE HONEST,</b> I've built this bot primarily for my own UPSC preparation and thought why not sharing with others?
 </p>
 
 <p>
