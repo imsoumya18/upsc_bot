@@ -2,15 +2,20 @@ import discord
 import requests
 from bs4 import BeautifulSoup
 
-client = discord.Client()
+bot = discord.Client()
 
 
-@client.event
+@bot.event
 async def on_ready():
     print('Started')
+    # text_channel_list = []
+    # for guild in bot.guilds:
+    #     for channel in guild.text_channels:
+    #         text_channel_list.append(channel.name)
+    # print('\n'.join(text_channel_list))
 
 
-@client.event
+@bot.event
 async def on_message(message):
     if message.content.lower() == '--help':
         embedparam = discord.Embed(title='--help', description='Get help', color=0x0addd7)
@@ -29,6 +34,12 @@ async def on_message(message):
         url = soup.find("a", string='Open File')
         embedparam = discord.Embed(title=url.get('title'), description='[Download]({})'.format('https://chahalacademy.com/' + url.get('href')), color=0x0addd7)
         await message.channel.send(embed=embedparam)
+    elif message.content.lower() == '--server' and message.author.id == 832576008149794818:
+        servers = []
+        async for guild in bot.fetch_guilds(limit=150):
+            servers.append(guild.name)
+        embedparam = discord.Embed(title='Server List', description='\n'.join(servers), color=0x0addd7)
+        await message.channel.send(embed=embedparam)
 
 
-client.run('TOKEN')
+bot.run('TOKEN')
