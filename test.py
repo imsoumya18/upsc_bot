@@ -1,7 +1,9 @@
 import discord
-from discord.ext import commands, tasks
+from discord.ext import tasks
+import datetime
 import requests
 from bs4 import BeautifulSoup
+import asyncio
 
 TOKEN = 'TOKEN(str)'               # Replace with your token
 OWN_ID = 'YOUR ID(int)'            # Replace with your own id
@@ -11,8 +13,15 @@ bot = discord.Client()
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(status=discord.Status.online, activity=discord.Game('with UPSC Aspirants'))
     print('Started')
+    while True:
+        res = requests.get('https://www.visioniascurrentaffairs.com')
+        soup = BeautifulSoup(res.text, 'html.parser')
+        url = soup.find('a', attrs={'class': 'green'})
+        embedparam = discord.Embed(title=url.getText(), description='[Download]({})'.format(url.get('href')),
+                                   color=0x0addd7)
+        await bot.get_channel(845113175561076827).send(embed=embedparam)
+        await asyncio.sleep(24*60*60)
 
 
 @bot.event
@@ -51,6 +60,7 @@ async def on_message(message):
             servers.append(guild.name)
         embedparam = discord.Embed(title='Server List', description='\n'.join(servers), color=0x0addd7)
         await message.channel.send(embed=embedparam)
+        await bot.get_channel(845113175561076827).send('Hi')
 
     elif message.content.lower() == '--channel' and message.author.id == OWN_ID:
         for guild in bot.guilds:
@@ -64,9 +74,20 @@ async def on_message(message):
         await message.channel.send(embed=embedparam)
 
 
-@tasks.loop(seconds=1)
-async def called_once_a_day():
-    await bot.get_channel(845113175561076827).send('Ok')
+# @tasks.loop(hours=24)
+# async def daily_task():
+#     await bot.get_channel(845113175561076827).send('Hi')
+#
+#
+# @daily_task.before_loop
+# async def wait_until_3pm_utc():
+#     now = datetime.datetime.utcnow()
+#     next_run = now.replace(hour=15, minute=7, second=0)
+#
+#     if next_run < now:
+#         next_run += datetime.timedelta(days=1)
+#
+#     await discord.utils.sleep_until(next_run)
 
 
 bot.run(TOKEN)
