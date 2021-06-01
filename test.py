@@ -21,7 +21,7 @@ async def on_ready():
         embedparam = discord.Embed(title=url.getText(), description='[Download]({})'.format(url.get('href')),
                                    color=0x0addd7)
         await bot.get_channel(845113175561076827).send(embed=embedparam)
-        await asyncio.sleep(24*60*60)
+        await asyncio.sleep(1)
 
 
 @bot.event
