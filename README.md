@@ -1,3 +1,4 @@
+
 <img src="https://github.com/imsoumya18/newspaper_bot/blob/main/assets/UPSC.jpg" alt="UPSC Logo" width="1000" height="400">
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
@@ -8,17 +9,21 @@
 </p>
 
 <p>
-  <b>HOWEVER,</b> <br>if you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper and magazine reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you may also download the PDF of the newspaper, magazine by visiting some websites. Why waste time searching on Google? Here is a quick solution.
+  <b>HOWEVER,</b> <br>If you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper and magazine reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspaper, magazine by visiting some websites. Why waste time searching on Google? Here is a quick solution.
 </p>
 
-**JUST ADD THIS BOT TO YOUR SERVER & TYPE '--hindu' FOR DAILY THE HINDU NEWSPAPER & '--yojana' FOR MONTHLY YOJANA MAGAZINE. LET'S GET SMARTER!!😎**
+**JUST ADD THIS BOT TO YOUR SERVER & TYPE '--hindu' FOR DAILY THE HINDU NEWSPAPER, '--htimes' FOR DAILY HINDUSTAN TIMES NEWSPAPER & '--yojana' FOR MONTHLY YOJANA MAGAZINE. LET'S WORK SMARTER, NOT HARDER!!😎**
 
-Type '--help' for help
+ALSO, Type '--help' for help
 
-To add the bot to your server,
-<a href="https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=2148001856&scope=bot">click here.</a>
+**CURRENTLY, THE BOT IS SENDING THE HINDU & HINDUSTAN TIMES DAILY AUTOMATICALLY WITHOUT ANY COMMAND @8 AM IST TO SOME SPECIFIC CHANNELS. TO ENROLL FOR YOUR CHANNEL FOR THIS DAILY AUTOMATIC SCHEDULE, MAIL ME(soumyadeep184@gmail.com) YOUR CHANNEL'S ID.**
 
-In case of any problem mail me: <a href="mailto:soumyadeep184@gmail.com">soumyadeep184@gmail.com</a> 
+Don't know how to get channel ID? Don't worry. Find it [here.](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-)
+
+To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=2148005952&scope=bot)
+
+In case of any problem mail me: soumyadeep184@gmail.com
+
 
 ![forthebadge made-by-soumya](https://img.shields.io/badge/CREATED_BY-SOUMYA-blue)
 
