@@ -5,7 +5,7 @@
 # Discord Bot for Daily The Hindu Newspaper PDF
 
 **TO BE HONEST,**
-I've built this bot primarily for my own UPSC preparation and thought why not sharing with you guys?🤔
+<br>I've built this bot primarily for my own UPSC preparation and thought why not sharing with you guys?🤔
 
 **HOWEVER,**
 If you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper and magazine reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspaper, magazine by visiting some websites. Why waste time searching on Google? Here is a quick solution.
