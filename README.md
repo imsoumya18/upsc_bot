@@ -1,4 +1,4 @@
-<img src="https://github.com/imsoumya18/newspaper_bot/blob/main/assets/UPSC.jpg" alt="UPSC Logo" width="1000" height="360">
+<img src="https://github.com/imsoumya18/newspaper_bot/blob/main/assets/UPSC.jpg" alt="UPSC Logo" width="1000" height="400">
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
@@ -10,9 +10,12 @@ I've built this bot primarily for my own UPSC preparation and thought why not sh
 **HOWEVER,**
 If you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper and magazine reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspaper, magazine by visiting some websites. Why waste time searching on Google? Here is a quick solution.
 
-**JUST ADD THIS BOT TO YOUR SERVER & TYPE `--hindu` FOR DAILY THE HINDU NEWSPAPER, `--htimes` FOR DAILY HINDUSTAN TIMES NEWSPAPER & `--yojana` FOR MONTHLY YOJANA MAGAZINE. LET'S WORK SMARTER, NOT HARDER!!😎**
-
-ALSO, Type `--help` for help
+**JUST ADD THIS BOT TO YOUR SERVER & TYPE
+`--hindu` FOR DAILY THE HINDU NEWSPAPER
+`--htimes` FOR DAILY HINDUSTAN TIMES NEWSPAPER
+`--yojana` FOR MONTHLY YOJANA MAGAZINE
+`--help` FOR HELP
+LET'S WORK SMARTER, NOT HARDER!!😎**
 
 **CURRENTLY, THE BOT IS SENDING THE HINDU & HINDUSTAN TIMES DAILY AUTOMATICALLY WITHOUT THE NEED OF ANY COMMAND @8 AM IST TO SOME SPECIFIC CHANNELS WHICH ARE ENROLLED. TO ENROLL YOUR CHANNEL FOR THIS DAILY AUTOMATIC SCHEDULE, SEND ME YOUR CHANNEL ID VIA MAIL(soumyadeep184@gmail.com) YOUR CHANNEL'S ID.**
 
