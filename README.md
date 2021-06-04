@@ -4,18 +4,11 @@
 
 # Discord Bot for Daily The Hindu Newspaper PDF
 
-**TO BE HONEST,**
-<br>I've built this bot primarily for my own UPSC preparation and thought why not sharing with you guys?🤔
+**TO BE HONEST,**<br>I've built this bot primarily for my own UPSC preparation and thought why not sharing with you guys?🤔
 
-**HOWEVER,**
-If you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper and magazine reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspaper, magazine by visiting some websites. Why waste time searching on Google? Here is a quick solution.
+**HOWEVER,**<br>If you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper and magazine reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspaper, magazine by visiting some websites. Why waste time searching on Google? Here is a quick solution.
 
-**JUST ADD THIS BOT TO YOUR SERVER & TYPE
-`--hindu` FOR DAILY THE HINDU NEWSPAPER
-`--htimes` FOR DAILY HINDUSTAN TIMES NEWSPAPER
-`--yojana` FOR MONTHLY YOJANA MAGAZINE
-`--help` FOR HELP
-LET'S WORK SMARTER, NOT HARDER!!😎**
+**JUST ADD THIS BOT TO YOUR SERVER & TYPE<br>`--hindu` FOR DAILY THE HINDU NEWSPAPER<br>`--htimes` FOR DAILY HINDUSTAN TIMES NEWSPAPER<br>`--yojana` FOR MONTHLY YOJANA MAGAZINE<br>`--help` FOR HELP<br>LET'S WORK SMARTER, NOT HARDER!!😎**
 
 **CURRENTLY, THE BOT IS SENDING THE HINDU & HINDUSTAN TIMES DAILY AUTOMATICALLY WITHOUT THE NEED OF ANY COMMAND @8 AM IST TO SOME SPECIFIC CHANNELS WHICH ARE ENROLLED. TO ENROLL YOUR CHANNEL FOR THIS DAILY AUTOMATIC SCHEDULE, SEND ME YOUR CHANNEL ID VIA MAIL(soumyadeep184@gmail.com) YOUR CHANNEL'S ID.**
 
