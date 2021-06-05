@@ -47,4 +47,4 @@ async def on_message(message):
         await message.channel.send(embed=embedparam)
 
 
-bot.run('ODQzNTU1NjkzMjA1NTIwNDM0.YKFkdQ.mk8DioskKq_D-9dxBI8eUzt_svk')
+bot.run('')
