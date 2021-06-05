@@ -14,7 +14,7 @@
 
 Don't know how to get channel ID? Don't worry. Find it [here.](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-)
 
-**MONTHLY SCHEDULING FOR YOJANA MAGAZINE IS NOW IN BETA MODE, YOU ALL WILL BE NOTIFIED ONCE IT'S RELEASED**
+**MONTHLY SCHEDULING FOR YOJANA MAGAZINE IS NOW IN BETA MODE, YOU ALL WILL BE NOTIFIED ONCE IT'S RELEASED.**
 
 To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=2148005952&scope=bot)
 
