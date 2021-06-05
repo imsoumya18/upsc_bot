@@ -6,11 +6,11 @@
 
 **TO BE HONEST,**<br>I've built this bot primarily for my own UPSC preparation and thought why not sharing with you guys?🤔
 
-**HOWEVER,**<br>If you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper and magazine reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspaper, magazine by visiting some websites. Why waste time searching on Google? Here is a quick solution.
+**HOWEVER,**<br>If you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper and magazine reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspaper, magazine by visiting some websites. Why to waste time searching on Google? Here is a quick solution.
 
 **JUST ADD THIS BOT TO YOUR SERVER & TYPE<br>`--hindu` FOR DAILY THE HINDU NEWSPAPER<br>`--htimes` FOR DAILY HINDUSTAN TIMES NEWSPAPER<br>`--yojana` FOR MONTHLY YOJANA MAGAZINE<br>`--help` FOR HELP<br>LET'S WORK SMARTER, NOT HARDER!!😎**
 
-**CURRENTLY, THE BOT IS SENDING THE HINDU & HINDUSTAN TIMES DAILY AUTOMATICALLY WITHOUT THE NEED OF ANY COMMAND @8 AM IST TO SOME SPECIFIC CHANNELS WHICH ARE ENROLLED. TO ENROLL YOUR CHANNEL FOR THIS DAILY AUTOMATIC SCHEDULE, SEND ME YOUR CHANNEL ID VIA MAIL(soumyadeep184@gmail.com) YOUR CHANNEL'S ID.**
+**CURRENTLY, THE BOT IS SENDING THE HINDU & HINDUSTAN TIMES DAILY AUTOMATICALLY WITHOUT THE NEED OF ANY COMMAND @8 AM IST TO SOME SPECIFIC CHANNELS WHICH ARE ENROLLED. TO ENROLL YOUR CHANNEL FOR THIS DAILY AUTOMATIC SCHEDULE, SEND ME YOUR CHANNEL ID VIA MAIL(soumyadeep184@gmail.com).**
 
 Don't know how to get channel ID? Don't worry. Find it [here.](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-)
 
