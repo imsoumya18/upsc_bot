@@ -18,6 +18,8 @@ Don't know how to get channel ID? Don't worry. Find it [here.](https://support.d
 
 To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=2148005952&scope=bot)
 
+**जय हिन्द** 🇮🇳
+
 Any type of feedback is appreciated: soumyadeep184@gmail.com
 
 ![forthebadge made-by-soumya](https://img.shields.io/badge/CREATED_BY-SOUMYA-blue)
