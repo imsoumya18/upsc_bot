@@ -20,11 +20,23 @@ async def on_ready():
 
 async def called_once_a_day():
     await bot.wait_until_ready()
-    hindu = requests.get('https://www.visioniascurrentaffairs.com')
-    soup = BeautifulSoup(hindu.text, 'html.parser')
-    url = soup.find('a', attrs={'class': 'green'})
-    embedparam = discord.Embed(title=url.getText(), description='[Download]({})'.format(url.get('href')),
-                               color=0x0addd7)
+
+    # hindu
+    res = requests.get('https://iasbano.com/the-hindu-pdf-download-1.php', headers={"User-Agent": "XY"})
+    soup = BeautifulSoup(res.text, 'html.parser')
+    tr = soup.find_all('tr')[2]
+    dat = tr.find_all('td')[0].getText().split()
+    dat[1] = dat[1][:-1]
+    title = 'The Hindu Epaper ' + "{:02d}".format(int(dat[0])) + '-'
+    for i in range(1, 13):
+        if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
+            title += "{:02d}".format(i)
+            break
+    title += '-' + dat[2]
+    url = tr.find_all('td')[1].find('a').get('href')
+    embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
+
+    # hindustan times
     htimes = requests.get('https://www.careerswave.in/hindustan-times-newspaper-download/',
                           headers={"User-Agent": "XY"})
     soup = BeautifulSoup(htimes.text, 'html.parser')
@@ -32,6 +44,8 @@ async def called_once_a_day():
         name='Hindustan Times Epaper ' + soup.find('tr', attrs={'data-row_id': '0'}).find('td').getText(),
         value='[Download]({})'.format(soup.find('tr', attrs={'data-row_id': '0'}).find_all('td')[1].getText()),
         inline=False)
+
+    # indian express
     try:
         res = requests.get('https://iasbano.com/indian-express-upsc.php#download_the_hindu',
                            headers={"User-Agent": "XY"})
@@ -86,11 +100,19 @@ async def on_message(message):
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--hindu':
-        res = requests.get('https://www.visioniascurrentaffairs.com')
+        res = requests.get('https://iasbano.com/the-hindu-pdf-download-1.php', headers={"User-Agent": "XY"})
         soup = BeautifulSoup(res.text, 'html.parser')
-        url = soup.find('a', attrs={'class': 'green'})
-        embedparam = discord.Embed(title=url.getText(), description='[Download]({})'.format(url.get('href')),
-                                   color=0x0addd7)
+        tr = soup.find_all('tr')[2]
+        dat = tr.find_all('td')[0].getText().split()
+        dat[1] = dat[1][:-1]
+        title = 'The Hindu Epaper ' + "{:02d}".format(int(dat[0])) + '-'
+        for i in range(1, 13):
+            if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
+                title += "{:02d}".format(i)
+                break
+        title += '-' + dat[2]
+        url = tr.find_all('td')[1].find('a').get('href')
+        embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--htimes':
