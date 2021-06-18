@@ -9,7 +9,7 @@ DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
 DEVELOPER_PRIVATE_CHANNEL = 'DEVELOPER_PRIVATE_CHANNEL_ID(int)'  # Developer's Private Channel ID
 DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Private Channel ID
 CHANNELS = ['LIST OF CHANNEL IDS(int)']  # Channel IDs
-WHEN = time(2, 30, 0)  # UTC Time
+WHEN = time(3, 00, 0)  # UTC Time
 
 bot = discord.Client()
 
@@ -98,7 +98,9 @@ async def on_message(message):
                                  inline=False)
             embedparam.add_field(name='--server', value='Get all servers list', inline=False)
             embedparam.add_field(name='--channel', value='Get all channels list', inline=False)
-            embedparam.add_field(name='--news <Channel ID(s)>', value='Send newspapers to channels immediately', inline=False)
+            embedparam.add_field(name='--news <Channel ID(s)>', value='Send newspapers to channels immediately',
+                                 inline=False)
+            embedparam.add_field(name='--send [<Channel ID(s)>] <message>', value='Send message to channels immediately', inline=False)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--hindu':
@@ -144,7 +146,8 @@ async def on_message(message):
             url = tr.find_all('td')[1].find('a').get('href')
             embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
         except:
-            embedparam = discord.Embed(title='Sorry😔', description='Error fetching The Indian Express today', color=0x0addd7)
+            embedparam = discord.Embed(title='Sorry😔', description='Error fetching The Indian Express today',
+                                       color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--yojana':
@@ -224,6 +227,12 @@ async def on_message(message):
         for i in message.content.split()[1:]:
             await bot.get_channel(int(i)).send(embed=embedparam)
         print(message.content.split())
+
+    elif message.content.startswith('--send') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
+        msg = message.content[message.content.find(']') + 2:]
+        channels = message.content[message.content.find('[') + 1: message.content.find(']')].split(', ')
+        for i in channels:
+            await bot.get_channel(int(i)).send(msg)
 
 
 bot.loop.create_task(background_task())
