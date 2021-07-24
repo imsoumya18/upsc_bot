@@ -1,4 +1,4 @@
-<img src="https://github.com/imsoumya18/newspaper_bot/blob/main/assets/UPSC.jpg" alt="UPSC Logo" width="1000" height="360">
+<img src="https://github.com/imsoumya18/upsc_bot/blob/main/assets/UPSC.jpg" alt="UPSC Logo" width="1000" height="360">
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
