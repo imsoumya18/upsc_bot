@@ -4,12 +4,12 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, time, timedelta
 
-TOKEN = 'ODQzNTU1NjkzMjA1NTIwNDM0.YKFkdQ.69i9OjajcuxU5AVvMWjEwv-dBYo'  # Bot Token
+TOKEN = 'TOKEN(str)'  # Bot Token
 DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
 DEVELOPER_PRIVATE_CHANNEL = 'DEVELOPER_PRIVATE_CHANNEL_ID(int)'  # Developer's Private Channel ID
 DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Private Channel ID
-CHANNELS = [845113175561076827, 847856568581357578]  # Channel IDs
-WHEN = time(8, 3, 0)  # UTC Time
+CHANNELS = ['LIST OF CHANNEL IDS(int)']  # Channel IDs
+WHEN = time(3, 00, 0)  # UTC Time
 
 bot = discord.Client()
 
