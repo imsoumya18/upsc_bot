@@ -4,12 +4,12 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, time, timedelta
 
-TOKEN = 'TOKEN(str)'  # Bot Token
+TOKEN = 'ODQzNTU1NjkzMjA1NTIwNDM0.YKFkdQ.69i9OjajcuxU5AVvMWjEwv-dBYo'  # Bot Token
 DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
 DEVELOPER_PRIVATE_CHANNEL = 'DEVELOPER_PRIVATE_CHANNEL_ID(int)'  # Developer's Private Channel ID
 DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Private Channel ID
-CHANNELS = ['LIST OF CHANNEL IDS(int)']  # Channel IDs
-WHEN = time(3, 00, 0)  # UTC Time
+CHANNELS = [845113175561076827, 847856568581357578]  # Channel IDs
+WHEN = time(8, 3, 0)  # UTC Time
 
 bot = discord.Client()
 
@@ -23,18 +23,30 @@ async def called_once_a_day():
     await bot.wait_until_ready()
 
     # hindu
-    res = requests.get('https://iasbano.com/the-hindu-pdf-download-1.php', headers={"User-Agent": "XY"})
+    # res = requests.get('https://iasbano.com/the-hindu-pdf-download-1.php', headers={"User-Agent": "XY"})
+    # soup = BeautifulSoup(res.text, 'html.parser')
+    # tr = soup.find_all('tr')[2]
+    # dat = tr.find_all('td')[0].getText().split()
+    # dat[1] = dat[1][:-1]
+    # title = 'The Hindu Epaper ' + "{:02d}".format(int(dat[0])) + '-'
+    # for i in range(1, 13):
+    #     if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
+    #         title += "{:02d}".format(i)
+    #         break
+    # title += '-' + dat[2]
+    # url = tr.find_all('td')[1].find('a').get('href')
+    res = requests.get('https://dailyepaper.in/home')
     soup = BeautifulSoup(res.text, 'html.parser')
-    tr = soup.find_all('tr')[2]
-    dat = tr.find_all('td')[0].getText().split()
-    dat[1] = dat[1][:-1]
-    title = 'The Hindu Epaper ' + "{:02d}".format(int(dat[0])) + '-'
+    res = requests.get(soup.find_all('a')[9].get('href'))
+    soup = BeautifulSoup(res.text, 'html.parser')
+    parts = soup.find_all('span')[28].getText().split()
+    title = 'The Hindu Epaper ' + parts[0] + '-'
     for i in range(1, 13):
-        if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
+        if datetime.strptime(str(i), '%m').strftime('%B') == parts[1]:
             title += "{:02d}".format(i)
             break
-    title += '-' + dat[2]
-    url = tr.find_all('td')[1].find('a').get('href')
+    title += '-' + parts[2][:-1]
+    url = soup.find_all('a')[16].get('href')
     embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
 
     # hindustan times
@@ -104,18 +116,30 @@ async def on_message(message):
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--hindu':
-        res = requests.get('https://iasbano.com/the-hindu-pdf-download-1.php', headers={"User-Agent": "XY"})
+        # res = requests.get('https://iasbano.com/the-hindu-pdf-download-1.php', headers={"User-Agent": "XY"})
+        # soup = BeautifulSoup(res.text, 'html.parser')
+        # tr = soup.find_all('tr')[2]
+        # dat = tr.find_all('td')[0].getText().split()
+        # dat[1] = dat[1][:-1]
+        # title = 'The Hindu Epaper ' + "{:02d}".format(int(dat[0])) + '-'
+        # for i in range(1, 13):
+        #     if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
+        #         title += "{:02d}".format(i)
+        #         break
+        # title += '-' + dat[2]
+        # url = tr.find_all('td')[1].find('a').get('href')
+        res = requests.get('https://dailyepaper.in/home')
         soup = BeautifulSoup(res.text, 'html.parser')
-        tr = soup.find_all('tr')[2]
-        dat = tr.find_all('td')[0].getText().split()
-        dat[1] = dat[1][:-1]
-        title = 'The Hindu Epaper ' + "{:02d}".format(int(dat[0])) + '-'
+        res = requests.get(soup.find_all('a')[9].get('href'))
+        soup = BeautifulSoup(res.text, 'html.parser')
+        parts = soup.find_all('span')[28].getText().split()
+        title = 'The Hindu Epaper ' + parts[0] + '-'
         for i in range(1, 13):
-            if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
+            if datetime.strptime(str(i), '%m').strftime('%B') == parts[1]:
                 title += "{:02d}".format(i)
                 break
-        title += '-' + dat[2]
-        url = tr.find_all('td')[1].find('a').get('href')
+        title += '-' + parts[2][:-1]
+        url = soup.find_all('a')[16].get('href')
         embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
@@ -183,18 +207,30 @@ async def on_message(message):
     elif message.content.startswith('--news') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
 
         # hindu
-        res = requests.get('https://iasbano.com/the-hindu-pdf-download-1.php', headers={"User-Agent": "XY"})
+        # res = requests.get('https://iasbano.com/the-hindu-pdf-download-1.php', headers={"User-Agent": "XY"})
+        # soup = BeautifulSoup(res.text, 'html.parser')
+        # tr = soup.find_all('tr')[2]
+        # dat = tr.find_all('td')[0].getText().split()
+        # dat[1] = dat[1][:-1]
+        # title = 'The Hindu Epaper ' + "{:02d}".format(int(dat[0])) + '-'
+        # for i in range(1, 13):
+        #     if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
+        #         title += "{:02d}".format(i)
+        #         break
+        # title += '-' + dat[2]
+        # url = tr.find_all('td')[1].find('a').get('href')
+        res = requests.get('https://dailyepaper.in/home')
         soup = BeautifulSoup(res.text, 'html.parser')
-        tr = soup.find_all('tr')[2]
-        dat = tr.find_all('td')[0].getText().split()
-        dat[1] = dat[1][:-1]
-        title = 'The Hindu Epaper ' + "{:02d}".format(int(dat[0])) + '-'
+        res = requests.get(soup.find_all('a')[9].get('href'))
+        soup = BeautifulSoup(res.text, 'html.parser')
+        parts = soup.find_all('span')[28].getText().split()
+        title = 'The Hindu Epaper ' + parts[0] + '-'
         for i in range(1, 13):
-            if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
+            if datetime.strptime(str(i), '%m').strftime('%B') == parts[1]:
                 title += "{:02d}".format(i)
                 break
-        title += '-' + dat[2]
-        url = tr.find_all('td')[1].find('a').get('href')
+        title += '-' + parts[2][:-1]
+        url = soup.find_all('a')[16].get('href')
         embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
 
         # hindustan times
