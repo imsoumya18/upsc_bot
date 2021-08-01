@@ -42,7 +42,7 @@ async def called_once_a_day():
     parts = soup.find_all('span')[28].getText().split()
     title = 'The Hindu Epaper ' + parts[0] + '-'
     for i in range(1, 13):
-        if datetime.strptime(str(i), '%m').strftime('%B') == parts[1]:
+        if datetime.strptime(str(i), '%m').strftime('%b') == parts[1]:
             title += "{:02d}".format(i)
             break
     title += '-' + parts[2][:-1]
@@ -135,7 +135,7 @@ async def on_message(message):
         parts = soup.find_all('span')[28].getText().split()
         title = 'The Hindu Epaper ' + parts[0] + '-'
         for i in range(1, 13):
-            if datetime.strptime(str(i), '%m').strftime('%B') == parts[1]:
+            if datetime.strptime(str(i), '%m').strftime('%b') == parts[1]:
                 title += "{:02d}".format(i)
                 break
         title += '-' + parts[2][:-1]
@@ -226,7 +226,7 @@ async def on_message(message):
         parts = soup.find_all('span')[28].getText().split()
         title = 'The Hindu Epaper ' + parts[0] + '-'
         for i in range(1, 13):
-            if datetime.strptime(str(i), '%m').strftime('%B') == parts[1]:
+            if datetime.strptime(str(i), '%m').strftime('%b') == parts[1]:
                 title += "{:02d}".format(i)
                 break
         title += '-' + parts[2][:-1]
