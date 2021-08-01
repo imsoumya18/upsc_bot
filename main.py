@@ -9,7 +9,7 @@ DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
 DEVELOPER_PRIVATE_CHANNEL = 'DEVELOPER_PRIVATE_CHANNEL_ID(int)'  # Developer's Private Channel ID
 DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Private Channel ID
 CHANNELS = ['LIST OF CHANNEL IDS(int)']  # Channel IDs
-WHEN = time(3, 00, 0)  # UTC Time
+WHEN = time(2, 30, 0)  # UTC Time
 
 bot = discord.Client()
 
