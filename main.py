@@ -8,8 +8,9 @@ TOKEN = 'TOKEN(str)'  # Bot Token
 DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
 DEVELOPER_PRIVATE_CHANNEL = 'DEVELOPER_PRIVATE_CHANNEL_ID(int)'  # Developer's Private Channel ID
 DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Private Channel ID
-CHANNELS = ['LIST OF CHANNEL IDS(int)']  # Channel IDs
-WHEN = time(2, 00, 0)  # UTC Time
+THE_HINDU_CHANNELS = ['LIST OF THE HINDU CHANNEL IDS(int)']  # The Hindu Channel IDs
+VISION_IAS_CHANNELS = ['LIST OF VISION IAS CHANNEL IDS(int)']  # Vision IAS Channel IDs
+WHEN = time(1, 30, 0)  # UTC Time
 
 bot = discord.Client()
 
@@ -23,18 +24,6 @@ async def called_once_a_day():
     await bot.wait_until_ready()
 
     # hindu
-    # res = requests.get('https://iasbano.com/the-hindu-pdf-download-1.php', headers={"User-Agent": "XY"})
-    # soup = BeautifulSoup(res.text, 'html.parser')
-    # tr = soup.find_all('tr')[2]
-    # dat = tr.find_all('td')[0].getText().split()
-    # dat[1] = dat[1][:-1]
-    # title = 'The Hindu Epaper ' + "{:02d}".format(int(dat[0])) + '-'
-    # for i in range(1, 13):
-    #     if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
-    #         title += "{:02d}".format(i)
-    #         break
-    # title += '-' + dat[2]
-    # url = tr.find_all('td')[1].find('a').get('href')
     res = requests.get('https://dailyepaper.in/home')
     soup = BeautifulSoup(res.text, 'html.parser')
     res = requests.get(soup.find_all('a')[9].get('href'))
@@ -49,34 +38,7 @@ async def called_once_a_day():
     url = soup.find_all('a')[16].get('href')
     embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
 
-    # hindustan times
-    htimes = requests.get('https://www.careerswave.in/hindustan-times-newspaper-download/',
-                          headers={"User-Agent": "XY"})
-    soup = BeautifulSoup(htimes.text, 'html.parser')
-    embedparam.add_field(
-        name='Hindustan Times Epaper ' + soup.find('tr', attrs={'data-row_id': '0'}).find('td').getText(),
-        value='[Download]({})'.format(soup.find('tr', attrs={'data-row_id': '0'}).find_all('td')[1].getText()),
-        inline=False)
-
-    # indian express
-    try:
-        res = requests.get('https://iasbano.com/indian-express-upsc.php#download_the_hindu',
-                           headers={"User-Agent": "XY"})
-        soup = BeautifulSoup(res.text, 'html.parser')
-        tr = soup.find_all('tr')[2]
-        dat = tr.find_all('td')[0].getText().split()
-        dat[1] = dat[1][:-1]
-        title = 'The Indian Express Epaper ' + "{:02d}".format(int(dat[0])) + '-'
-        for i in range(1, 13):
-            if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
-                title += "{:02d}".format(i)
-                break
-        title += '-' + dat[2]
-        url = tr.find_all('td')[1].find('a').get('href')
-        embedparam.add_field(name=title, value='[Download]({})'.format(url), inline=False)
-    except:
-        embedparam.add_field(name='Sorry😔', value='Error fetching The Indian Express today', inline=False)
-    for i in CHANNELS:
+    for i in THE_HINDU_CHANNELS:
         await bot.get_channel(i).send(embed=embedparam)
 
 
@@ -101,33 +63,19 @@ async def background_task():
 async def on_message(message):
     if message.content.lower() == '--help':
         embedparam = discord.Embed(title='--help', description='Get help', color=0x0addd7)
-        embedparam.add_field(name='--hindu', value='Get daily The Hindu newspaper PDF', inline=False)
-        embedparam.add_field(name='--htimes', value='Get daily Hindustan Times newspaper PDF', inline=False)
-        embedparam.add_field(name='--ie', value='Get daily The Indian Express newspaper PDF', inline=False)
-        embedparam.add_field(name='--yojana', value='Get monthly Yojana magazine PDF', inline=False)
+        embedparam.add_field(name='--hindu', value='Get latest The Hindu newspaper PDF', inline=False)
+        embedparam.add_field(name='--vision', value='Get latest Vision IAS Current Affairs PDF', inline=False)
         if message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
             embedparam.add_field(name='---------------Extras---------------', value='Extra commands for DEVELOPER ONLY',
                                  inline=False)
-            embedparam.add_field(name='--server', value='Get all servers list', inline=False)
-            embedparam.add_field(name='--channel', value='Get all channels list', inline=False)
-            embedparam.add_field(name='--news <Channel ID(s)>', value='Send newspapers to channels immediately',
+            embedparam.add_field(name='--servers', value='Get all servers list', inline=False)
+            embedparam.add_field(name='--channels', value='Get all channels list', inline=False)
+            embedparam.add_field(name='--send_hindu <Channel ID(s)>', value='Send newspapers to channels immediately',
                                  inline=False)
-            embedparam.add_field(name='--send [<Channel ID(s)>] <message>', value='Send message to channels immediately', inline=False)
+            embedparam.add_field(name='--send_msg [<Channel ID(s)>] <message>', value='Send message to channels immediately', inline=False)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--hindu':
-        # res = requests.get('https://iasbano.com/the-hindu-pdf-download-1.php', headers={"User-Agent": "XY"})
-        # soup = BeautifulSoup(res.text, 'html.parser')
-        # tr = soup.find_all('tr')[2]
-        # dat = tr.find_all('td')[0].getText().split()
-        # dat[1] = dat[1][:-1]
-        # title = 'The Hindu Epaper ' + "{:02d}".format(int(dat[0])) + '-'
-        # for i in range(1, 13):
-        #     if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
-        #         title += "{:02d}".format(i)
-        #         break
-        # title += '-' + dat[2]
-        # url = tr.find_all('td')[1].find('a').get('href')
         res = requests.get('https://dailyepaper.in/home')
         soup = BeautifulSoup(res.text, 'html.parser')
         res = requests.get(soup.find_all('a')[9].get('href'))
@@ -143,54 +91,29 @@ async def on_message(message):
         embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
-    elif message.content.lower() == '--htimes':
-        res = requests.get('https://www.careerswave.in/hindustan-times-newspaper-download/',
-                           headers={"User-Agent": "XY"})
+    elif message.content.lower() == '--vision':
+        res = requests.get('http://www.visionias.in/resources/current_affairs.php?c=ca')
         soup = BeautifulSoup(res.text, 'html.parser')
-        embedparam = discord.Embed(
-            title='Hindustan Times Epaper ' + soup.find('tr', attrs={'data-row_id': '0'}).find('td').getText(),
-            description='[Download]({})'.format(
-                soup.find('tr', attrs={'data-row_id': '0'}).find_all('td')[1].getText()), color=0x0addd7)
+        title = 'Vision IAS Current Affairs ' + soup.find('a').getText().strip()
+        url = soup.find('a').get('href')
+        embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
-    elif message.content.lower() == '--ie':
-        try:
-            res = requests.get('https://iasbano.com/indian-express-upsc.php#download_the_hindu',
-                               headers={"User-Agent": "XY"})
-            soup = BeautifulSoup(res.text, 'html.parser')
-            tr = soup.find_all('tr')[2]
-            dat = tr.find_all('td')[0].getText().split()
-            dat[1] = dat[1][:-1]
-            title = 'The Indian Express Epaper ' + "{:02d}".format(int(dat[0])) + '-'
-            for i in range(1, 13):
-                if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
-                    title += "{:02d}".format(i)
-                    break
-            title += '-' + dat[2]
-            url = tr.find_all('td')[1].find('a').get('href')
-            embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
-        except:
-            embedparam = discord.Embed(title='Sorry😔', description='Error fetching The Indian Express today',
-                                       color=0x0addd7)
-        await message.channel.send(embed=embedparam)
+    elif message.content.startswith('++'):
+        with open('vision.txt', 'r') as testfile:
+            prev = testfile.read()
+        if prev == 'Soumya':
+            with open('vision.txt', 'w') as newfile:
+                newfile.write('Changed')
 
-    elif message.content.lower() == '--yojana':
-        res = requests.get('https://chahalacademy.com/free-downloads-yojana')
-        soup = BeautifulSoup(res.text, 'html.parser')
-        url = soup.find('a', string='Open File')
-        embedparam = discord.Embed(title=url.get('title'),
-                                   description='[Download]({})'.format('https://chahalacademy.com/' + url.get('href')),
-                                   color=0x0addd7)
-        await message.channel.send(embed=embedparam)
-
-    elif message.content.lower() == '--server' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
+    elif message.content.lower() == '--servers' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
         servers = []
         async for guild in bot.fetch_guilds(limit=150):
             servers.append(guild.name)
         embedparam = discord.Embed(title='Server List', description='\n'.join(servers), color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
-    elif message.content.lower() == '--channel' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
+    elif message.content.lower() == '--channels' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
         for guild in bot.guilds:
             text_channel_list = []
             for channel in guild.text_channels:
@@ -204,21 +127,9 @@ async def on_message(message):
                 embedparam.add_field(name=guild.name, value='\n'.join(text_channel_list), inline=False)
         await message.channel.send(embed=embedparam)
 
-    elif message.content.startswith('--news') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
+    elif message.content.startswith('--send_hindu') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
 
         # hindu
-        # res = requests.get('https://iasbano.com/the-hindu-pdf-download-1.php', headers={"User-Agent": "XY"})
-        # soup = BeautifulSoup(res.text, 'html.parser')
-        # tr = soup.find_all('tr')[2]
-        # dat = tr.find_all('td')[0].getText().split()
-        # dat[1] = dat[1][:-1]
-        # title = 'The Hindu Epaper ' + "{:02d}".format(int(dat[0])) + '-'
-        # for i in range(1, 13):
-        #     if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
-        #         title += "{:02d}".format(i)
-        #         break
-        # title += '-' + dat[2]
-        # url = tr.find_all('td')[1].find('a').get('href')
         res = requests.get('https://dailyepaper.in/home')
         soup = BeautifulSoup(res.text, 'html.parser')
         res = requests.get(soup.find_all('a')[9].get('href'))
@@ -233,38 +144,10 @@ async def on_message(message):
         url = soup.find_all('a')[16].get('href')
         embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
 
-        # hindustan times
-        htimes = requests.get('https://www.careerswave.in/hindustan-times-newspaper-download/',
-                              headers={"User-Agent": "XY"})
-        soup = BeautifulSoup(htimes.text, 'html.parser')
-        embedparam.add_field(
-            name='Hindustan Times Epaper ' + soup.find('tr', attrs={'data-row_id': '0'}).find('td').getText(),
-            value='[Download]({})'.format(soup.find('tr', attrs={'data-row_id': '0'}).find_all('td')[1].getText()),
-            inline=False)
-
-        # indian express
-        try:
-            res = requests.get('https://iasbano.com/indian-express-upsc.php#download_the_hindu',
-                               headers={"User-Agent": "XY"})
-            soup = BeautifulSoup(res.text, 'html.parser')
-            tr = soup.find_all('tr')[2]
-            dat = tr.find_all('td')[0].getText().split()
-            dat[1] = dat[1][:-1]
-            title = 'The Indian Express Epaper ' + "{:02d}".format(int(dat[0])) + '-'
-            for i in range(1, 13):
-                if datetime.strptime(str(i), '%m').strftime('%B') == dat[1]:
-                    title += "{:02d}".format(i)
-                    break
-            title += '-' + dat[2]
-            url = tr.find_all('td')[1].find('a').get('href')
-            embedparam.add_field(name=title, value='[Download]({})'.format(url), inline=False)
-        except:
-            embedparam.add_field(name='Sorry😔', value='Error fetching The Indian Express today', inline=False)
         for i in message.content.split()[1:]:
             await bot.get_channel(int(i)).send(embed=embedparam)
-        print(message.content.split())
 
-    elif message.content.startswith('--send') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
+    elif message.content.startswith('--send_msg') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
         msg = message.content[message.content.find(']') + 2:]
         channels = message.content[message.content.find('[') + 1: message.content.find(']')].split(', ')
         for i in channels:
