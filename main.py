@@ -3,6 +3,8 @@ import asyncio
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, time, timedelta
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 TOKEN = 'TOKEN(str)'  # Bot Token
 DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
@@ -10,7 +12,13 @@ DEVELOPER_PRIVATE_CHANNEL = 'DEVELOPER_PRIVATE_CHANNEL_ID(int)'  # Developer's P
 DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Private Channel ID
 THE_HINDU_CHANNELS = ['LIST OF THE HINDU CHANNEL IDS(int)']  # The Hindu Channel IDs
 VISION_IAS_CHANNELS = ['LIST OF VISION IAS CHANNEL IDS(int)']  # Vision IAS Channel IDs
+ANS_WRITING_RECORD_CHANNEL = 'ANSWER WRITING RECORD CHANNEL(int)'  # Answer Writing Record Channel
 WHEN = time(1, 30, 0)  # UTC Time
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/spreadsheets',
+         'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive']
+creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
+client = gspread.authorize(creds)
+sheet = client.open('File Name').worksheet('Sheet Name')
 
 bot = discord.Client()
 
@@ -70,6 +78,7 @@ async def on_message(message):
                                  inline=False)
             embedparam.add_field(name='--servers', value='Get all servers list', inline=False)
             embedparam.add_field(name='--channels', value='Get all channels list', inline=False)
+            embedparam.add_field(name='--q <Question No>', value='Update Mains Answer Writing in Spreadsheet', inline=False)
             embedparam.add_field(name='--send_hindu <Channel ID(s)>', value='Send newspapers to channels immediately',
                                  inline=False)
             embedparam.add_field(name='--send_msg [<Channel ID(s)>] <message>', value='Send message to channels immediately', inline=False)
@@ -99,13 +108,6 @@ async def on_message(message):
         embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
-    elif message.content.startswith('++'):
-        with open('vision.txt', 'r') as testfile:
-            prev = testfile.read()
-        if prev == 'Soumya':
-            with open('vision.txt', 'w') as newfile:
-                newfile.write('Changed')
-
     elif message.content.lower() == '--servers' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
         servers = []
         async for guild in bot.fetch_guilds(limit=150):
@@ -127,8 +129,22 @@ async def on_message(message):
                 embedparam.add_field(name=guild.name, value='\n'.join(text_channel_list), inline=False)
         await message.channel.send(embed=embedparam)
 
-    elif message.content.startswith('--send_hindu') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
+    elif message.content.startswith('--q') and message.author.id == DEVELOPER_ID and message.channel.id == ANS_WRITING_RECORD_CHANNEL:
+        x = int(message.content.split()[1])
+        res = requests.get('https://www.drishtiias.com/mains-practice-question/question-' + str(x))
+        soup = BeautifulSoup(res.text, 'html.parser')
+        paper = soup.find('span', {'class': 'paper-span'}).find_all('a')[0].getText().strip()
+        paper = paper.split()[0] + paper.split()[2]
+        topic = soup.find('span', {'class': 'paper-span'}).find_all('a')[1].getText().strip()
+        i = 3
+        while x > int(sheet.cell(i, 1).value):
+            i += 1
+        data = [x, paper, topic]
+        sheet.insert_row(data, i)
+        embedparam = discord.Embed(title='All Questions Till Now', description=', '.join(sheet.col_values(1)[2:]), color=0x0addd7)
+        await message.channel.send(embed=embedparam)
 
+    elif message.content.startswith('--send_hindu') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
         # hindu
         res = requests.get('https://dailyepaper.in/home')
         soup = BeautifulSoup(res.text, 'html.parser')
