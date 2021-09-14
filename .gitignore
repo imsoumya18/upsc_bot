@@ -128,5 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea
-
-D:\Work & Academic\Github\upsc_bot\creds.json
+!/test.txt
