@@ -139,6 +139,8 @@ async def on_message(message):
         i = 3
         while x > int(sheet.cell(i, 1).value):
             i += 1
+            if sheet.cell(i, 1).value is None:
+                break
         data = [x, paper, topic]
         sheet.insert_row(data, i)
         embedparam = discord.Embed(title='All Questions Till Now', description=', '.join(sheet.col_values(1)[2:]), color=0x0addd7)
