@@ -6,19 +6,19 @@ from datetime import datetime, time, timedelta
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-TOKEN = 'TOKEN(str)'  # Bot Token
-DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
-DEVELOPER_PRIVATE_CHANNEL = 'DEVELOPER_PRIVATE_CHANNEL_ID(int)'  # Developer's Private Channel ID
-DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Private Channel ID
-THE_HINDU_CHANNELS = ['LIST OF THE HINDU CHANNEL IDS(int)']  # The Hindu Channel IDs
-VISION_IAS_CHANNELS = ['LIST OF VISION IAS CHANNEL IDS(int)']  # Vision IAS Channel IDs
-ANS_WRITING_RECORD_CHANNEL = 'ANSWER WRITING RECORD CHANNEL(int)'  # Answer Writing Record Channel
+TOKEN = 'ODQzNTU1NjkzMjA1NTIwNDM0.YKFkdQ.yIyDwmzOIP_raEHZV43dUzWav3s'  # Bot Token
+DEVELOPER_ID = 832576008149794818  # Your Own ID
+DEVELOPER_PRIVATE_CHANNEL = 847856568581357578  # Developer's Private Channel ID
+DEVELOPER_SEND_CHANNEL = 853513928808857650  # Developer's Private Channel ID
+THE_HINDU_CHANNELS = [845113175561076827, 847856568581357578]  # The Hindu Channel IDs
+VISION_IAS_CHANNELS = [845113175561076827, 847856568581357578]  # Vision IAS Channel IDs
+ANS_WRITING_RECORD_CHANNEL = 887421555548758086  # Answer Writing Record Channel
 WHEN = time(1, 30, 0)  # UTC Time
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/spreadsheets',
          'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
 client = gspread.authorize(creds)
-sheet = client.open('File Name').worksheet('Sheet Name')
+sheet = client.open('Way To Mussoorie').worksheet('Mains Answer')
 
 bot = discord.Client()
 
