@@ -19,6 +19,7 @@ scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/au
 creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
 client = gspread.authorize(creds)
 sheet = client.open('File Name').worksheet('Sheet Name')
+secret_sheet = client.open('File Name').worksheet('Sheet Name')
 
 bot = discord.Client()
 
@@ -45,9 +46,20 @@ async def called_once_a_day():
     title += '-' + parts[2][:-1]
     url = soup.find_all('a')[16].get('href')
     embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
-
     for i in THE_HINDU_CHANNELS:
         await bot.get_channel(i).send(embed=embedparam)
+
+    # vision
+    res = requests.get('http://www.visionias.in/resources/current_affairs.php?c=ca')
+    soup = BeautifulSoup(res.text, 'html.parser')
+    title = 'Vision IAS Current Affairs ' + soup.find('a').getText().strip()
+    url = soup.find('a').get('href')
+    if title != secret_sheet.cell(1, 1).value:
+        embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
+        for i in VISION_IAS_CHANNELS:
+            await bot.get_channel(i).send(embed=embedparam)
+        secret_sheet.delete_rows(1)
+        secret_sheet.insert_row([title], 1)
 
 
 async def background_task():
@@ -136,14 +148,17 @@ async def on_message(message):
         paper = soup.find('span', {'class': 'paper-span'}).find_all('a')[0].getText().strip()
         paper = paper.split()[0] + paper.split()[2]
         topic = soup.find('span', {'class': 'paper-span'}).find_all('a')[1].getText().strip()
-        i = 3
-        while x > int(sheet.cell(i, 1).value):
-            i += 1
-            if sheet.cell(i, 1).value is None:
-                break
-        data = [x, paper, topic]
-        sheet.insert_row(data, i)
-        embedparam = discord.Embed(title='All Questions Till Now', description=', '.join(sheet.col_values(1)[2:]), color=0x0addd7)
+        if str(x) in sheet.col_values(1)[2:]:
+            embedparam = discord.Embed(title='Question Already Done', description=', '.join(sheet.col_values(1)[2:]), color=0x0addd7)
+        else:
+            i = 3
+            while x > int(sheet.cell(i, 1).value):
+                i += 1
+                if sheet.cell(i, 1).value is None:
+                    break
+            data = [x, paper, topic]
+            sheet.insert_row(data, i)
+            embedparam = discord.Embed(title='All Questions Till Now', description=', '.join(sheet.col_values(1)[2:]), color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
     elif message.content.startswith('--send_hindu') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
