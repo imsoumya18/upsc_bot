@@ -111,6 +111,7 @@ async def on_message(message):
         url = soup.find_all('a')[16].get('href')
         embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
         await message.channel.send(embed=embedparam)
+        await message.delete()
 
     elif message.content.lower() == '--vision':
         res = requests.get('http://www.visionias.in/resources/current_affairs.php?c=ca')
@@ -119,6 +120,7 @@ async def on_message(message):
         url = soup.find('a').get('href')
         embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
         await message.channel.send(embed=embedparam)
+        await message.delete()
 
     elif message.content.lower() == '--servers' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
         servers = []
