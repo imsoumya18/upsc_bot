@@ -89,7 +89,6 @@ async def on_message(message):
             embedparam.add_field(name='---------------Extras---------------', value='Extra commands for DEVELOPER ONLY',
                                  inline=False)
             embedparam.add_field(name='--servers', value='Get all servers list', inline=False)
-            embedparam.add_field(name='--channels', value='Get all channels list', inline=False)
             embedparam.add_field(name='--q <Question No>', value='Update Mains Answer Writing in Spreadsheet', inline=False)
             embedparam.add_field(name='--send_hindu <Channel ID(s)>', value='Send newspapers to channels immediately',
                                  inline=False)
@@ -127,20 +126,6 @@ async def on_message(message):
         async for guild in bot.fetch_guilds(limit=150):
             servers.append(guild.name)
         embedparam = discord.Embed(title='Server List', description='\n'.join(servers), color=0x0addd7)
-        await message.channel.send(embed=embedparam)
-
-    elif message.content.lower() == '--channels' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
-        for guild in bot.guilds:
-            text_channel_list = []
-            for channel in guild.text_channels:
-                try:
-                    text_channel_list.append(channel.name)
-                except:
-                    text_channel_list.append('<Censored>')
-            if guild == bot.guilds[0]:
-                embedparam = discord.Embed(title=guild.name, description='\n'.join(text_channel_list), color=0x0addd7)
-            else:
-                embedparam.add_field(name=guild.name, value='\n'.join(text_channel_list), inline=False)
         await message.channel.send(embed=embedparam)
 
     elif message.content.startswith('--q') and message.author.id == DEVELOPER_ID and message.channel.id == ANS_WRITING_RECORD_CHANNEL:
