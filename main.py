@@ -9,6 +9,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 TOKEN = 'TOKEN(str)'  # Bot Token
 DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
 DEVELOPER_PRIVATE_CHANNEL = 'DEVELOPER_PRIVATE_CHANNEL_ID(int)'  # Developer's Private Channel ID
+PUSH_LOGS_CHANNEL = 'PUSH_LOGS_CHANNEL_ID(int)'  # Push Logs Channel ID
 DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Private Channel ID
 THE_HINDU_CHANNELS = ['LIST OF THE HINDU CHANNEL IDS(int)']  # The Hindu Channel IDs
 VISION_IAS_CHANNELS = ['LIST OF VISION IAS CHANNEL IDS(int)']  # Vision IAS Channel IDs
@@ -27,6 +28,7 @@ bot = discord.Client()
 @bot.event
 async def on_ready():
     print('Started')
+    await bot.get_channel(PUSH_LOGS_CHANNEL).send('Pushed to Heroku just now!!')
 
 
 async def called_once_a_day():
