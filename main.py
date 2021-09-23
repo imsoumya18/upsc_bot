@@ -10,7 +10,8 @@ TOKEN = 'TOKEN(str)'  # Bot Token
 DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
 DEVELOPER_PRIVATE_CHANNEL = 'DEVELOPER_PRIVATE_CHANNEL_ID(int)'  # Developer's Private Channel ID
 PUSH_LOGS_CHANNEL = 'PUSH_LOGS_CHANNEL_ID(int)'  # Push Logs Channel ID
-DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Private Channel ID
+DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Send Channel ID
+COUNTDOWN_CHANNEL = 'COUNTDOWN_CHANNEL_ID(int)'  # Countdown Channel ID
 THE_HINDU_CHANNELS = ['LIST OF THE HINDU CHANNEL IDS(int)']  # The Hindu Channel IDs
 VISION_IAS_CHANNELS = ['LIST OF VISION IAS CHANNEL IDS(int)']  # Vision IAS Channel IDs
 ANS_WRITING_RECORD_CHANNEL = 'ANSWER WRITING RECORD CHANNEL(int)'  # Answer Writing Record Channel
@@ -33,6 +34,11 @@ async def on_ready():
 
 async def called_once_a_day():
     await bot.wait_until_ready()
+
+    # countdown
+    prelims = datetime(2023, 6, 1)
+    today = datetime.today()
+    await bot.get_channel(COUNTDOWN_CHANNEL).edit(name=str((prelims - today).days) + ' days to prelims!')
 
     # hindu
     res = requests.get('https://dailyepaper.in/home')
@@ -91,10 +97,14 @@ async def on_message(message):
             embedparam.add_field(name='---------------Extras---------------', value='Extra commands for DEVELOPER ONLY',
                                  inline=False)
             embedparam.add_field(name='--servers', value='Get all servers list', inline=False)
-            embedparam.add_field(name='--q <Question No>', value='Update Mains Answer Writing in Spreadsheet', inline=False)
-            embedparam.add_field(name='--send_hindu <Channel ID(s)>', value='Send newspapers to channels immediately',
+            embedparam.add_field(name='--q <Question No>', value='Update Mains Answer Writing in Spreadsheet',
                                  inline=False)
-            embedparam.add_field(name='--send_msg [<Channel ID(s)>] <message>', value='Send message to channels immediately', inline=False)
+            embedparam.add_field(name='--send_hindu <Channel ID(s)>', value='Send The Hindu to channels immediately',
+                                 inline=False)
+            embedparam.add_field(name='--send_vision <Channel ID(s)>', value='Send Vision IAS magazine to channels immediately',
+                                 inline=False)
+            embedparam.add_field(name='--send_msg [<Channel ID(s)>] <message>',
+                                 value='Send message to channels immediately', inline=False)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--hindu':
@@ -130,7 +140,8 @@ async def on_message(message):
         embedparam = discord.Embed(title='Server List', description='\n'.join(servers), color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
-    elif message.content.startswith('--q') and message.author.id == DEVELOPER_ID and message.channel.id == ANS_WRITING_RECORD_CHANNEL:
+    elif message.content.startswith(
+            '--q') and message.author.id == DEVELOPER_ID and message.channel.id == ANS_WRITING_RECORD_CHANNEL:
         x = int(message.content.split()[1])
         res = requests.get('https://www.drishtiias.com/mains-practice-question/question-' + str(x))
         soup = BeautifulSoup(res.text, 'html.parser')
@@ -138,7 +149,8 @@ async def on_message(message):
         paper = paper.split()[0] + paper.split()[2]
         topic = soup.find('span', {'class': 'paper-span'}).find_all('a')[1].getText().strip()
         if str(x) in sheet.col_values(1)[2:]:
-            embedparam = discord.Embed(title='Question Already Done', description=', '.join(sheet.col_values(1)[2:]), color=0x0addd7)
+            embedparam = discord.Embed(title='Question Already Done', description=', '.join(sheet.col_values(1)[2:]),
+                                       color=0x0addd7)
         else:
             i = 3
             while x > int(sheet.cell(i, 1).value):
@@ -147,10 +159,12 @@ async def on_message(message):
                     break
             data = [x, paper, topic]
             sheet.insert_row(data, i)
-            embedparam = discord.Embed(title='All Questions Till Now', description=', '.join(sheet.col_values(1)[2:]), color=0x0addd7)
+            embedparam = discord.Embed(title='All Questions Till Now', description=', '.join(sheet.col_values(1)[2:]),
+                                       color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
-    elif message.content.startswith('--send_hindu') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
+    elif message.content.startswith(
+            '--send_hindu') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
         # hindu
         res = requests.get('https://dailyepaper.in/home')
         soup = BeautifulSoup(res.text, 'html.parser')
@@ -165,11 +179,22 @@ async def on_message(message):
         title += '-' + parts[2][:-1]
         url = soup.find_all('a')[16].get('href')
         embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
-
         for i in message.content.split()[1:]:
             await bot.get_channel(int(i)).send(embed=embedparam)
 
-    elif message.content.startswith('--send_msg') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
+    elif message.content.startswith(
+            '--send_vision') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
+        # vision
+        res = requests.get('http://www.visionias.in/resources/current_affairs.php?c=ca')
+        soup = BeautifulSoup(res.text, 'html.parser')
+        title = 'Vision IAS Current Affairs ' + soup.find('a').getText().strip()
+        url = soup.find('a').get('href')
+        embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
+        for i in message.content.split()[1:]:
+            await bot.get_channel(int(i)).send(embed=embedparam)
+
+    elif message.content.startswith(
+            '--send_msg') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
         msg = message.content[message.content.find(']') + 2:]
         channels = message.content[message.content.find('[') + 1: message.content.find(']')].split(', ')
         for i in channels:
