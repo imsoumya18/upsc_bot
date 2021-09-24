@@ -16,7 +16,7 @@ Don't know how to get channel ID? Don't worry. Find it [here.](https://support.d
 
 **MONTHLY SCHEDULING FOR YOJANA MAGAZINE IS NOW IN BETA MODE, YOU ALL WILL BE NOTIFIED ONCE IT'S RELEASED.**
 
-To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=534723950656&scope=bot)
+To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=8&scope=bot)
 
 ***जय हिन्द***
 
