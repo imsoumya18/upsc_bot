@@ -178,9 +178,13 @@ async def on_message(message):
     elif message.content.startswith(
             '--send_hindu') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
         # hindu
-        res = requests.get('https://dailyepaper.in/home')
-        soup = BeautifulSoup(res.text, 'html.parser')
-        res = requests.get(soup.find_all('a')[9].get('href'))
+        # res = requests.get('https://dailyepaper.in/home')
+        # soup = BeautifulSoup(res.text, 'html.parser')
+        # res = requests.get(soup.find_all('a')[9].get('href'))
+        d = str(datetime.now().day)
+        m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
+        y = str(datetime.now().year)
+        res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-' + d + '-' + m + '-' + y)
         soup = BeautifulSoup(res.text, 'html.parser')
         parts = soup.find_all('span')[28].getText().split()
         title = 'The Hindu Epaper ' + parts[0] + '-'
