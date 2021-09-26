@@ -41,9 +41,13 @@ async def called_once_a_day():
     await bot.get_channel(COUNTDOWN_CHANNEL).edit(name=str((prelims - today).days) + ' days to prelims!')
 
     # hindu
-    res = requests.get('https://dailyepaper.in/home')
-    soup = BeautifulSoup(res.text, 'html.parser')
-    res = requests.get(soup.find_all('a')[9].get('href'))
+    # res = requests.get('https://dailyepaper.in/home')
+    # soup = BeautifulSoup(res.text, 'html.parser')
+    # res = requests.get(soup.find_all('a')[9].get('href'))
+    d = str(datetime.now().day)
+    m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
+    y = str(datetime.now().year)
+    res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-' + d + '-' + m + '-' + y)
     soup = BeautifulSoup(res.text, 'html.parser')
     parts = soup.find_all('span')[28].getText().split()
     title = 'The Hindu Epaper ' + parts[0] + '-'
@@ -96,6 +100,7 @@ async def on_message(message):
         if message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
             embedparam.add_field(name='---------------Extras---------------', value='Extra commands for DEVELOPER ONLY',
                                  inline=False)
+            embedparam.add_field(name='--ping', value='Check connection', inline=False)
             embedparam.add_field(name='--servers', value='Get all servers list', inline=False)
             embedparam.add_field(name='--q <Question No>', value='Update Mains Answer Writing in Spreadsheet',
                                  inline=False)
@@ -108,9 +113,13 @@ async def on_message(message):
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--hindu':
-        res = requests.get('https://dailyepaper.in/home')
-        soup = BeautifulSoup(res.text, 'html.parser')
-        res = requests.get(soup.find_all('a')[9].get('href'))
+        # res = requests.get('https://dailyepaper.in/home')
+        # soup = BeautifulSoup(res.text, 'html.parser')
+        # res = requests.get(soup.find_all('a')[9].get('href'))
+        d = str(datetime.now().day)
+        m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
+        y = str(datetime.now().year)
+        res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-' + d + '-' + m + '-' + y)
         soup = BeautifulSoup(res.text, 'html.parser')
         parts = soup.find_all('span')[28].getText().split()
         title = 'The Hindu Epaper ' + parts[0] + '-'
@@ -132,6 +141,9 @@ async def on_message(message):
         embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
         await message.channel.send(embed=embedparam)
         await message.delete()
+
+    elif message.content.lower() == '--ping' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
+        await message.channel.send('--pong')
 
     elif message.content.lower() == '--servers' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
         servers = []
