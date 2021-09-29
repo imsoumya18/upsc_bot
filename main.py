@@ -47,7 +47,7 @@ async def called_once_a_day():
     d = str(datetime.now().day)
     m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
     y = str(datetime.now().year)
-    res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-' + d + '-' + m + '-' + y)
+    res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-free-' + d + '-' + m + '-' + y)
     soup = BeautifulSoup(res.text, 'html.parser')
     parts = soup.find_all('span')[28].getText().split()
     title = 'The Hindu Epaper ' + parts[0] + '-'
@@ -119,7 +119,7 @@ async def on_message(message):
         d = str(datetime.now().day)
         m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
         y = str(datetime.now().year)
-        res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-' + d + '-' + m + '-' + y)
+        res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-free-' + d + '-' + m + '-' + y)
         soup = BeautifulSoup(res.text, 'html.parser')
         parts = soup.find_all('span')[28].getText().split()
         title = 'The Hindu Epaper ' + parts[0] + '-'
@@ -184,7 +184,7 @@ async def on_message(message):
         d = str(datetime.now().day)
         m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
         y = str(datetime.now().year)
-        res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-' + d + '-' + m + '-' + y)
+        res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-free-' + d + '-' + m + '-' + y)
         soup = BeautifulSoup(res.text, 'html.parser')
         parts = soup.find_all('span')[28].getText().split()
         title = 'The Hindu Epaper ' + parts[0] + '-'
