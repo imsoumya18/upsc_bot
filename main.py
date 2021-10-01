@@ -26,6 +26,25 @@ secret_sheet = client.open('File Name').worksheet('Sheet Name')
 bot = discord.Client()
 
 
+def hindu():
+    d = str(datetime.now().day)
+    if len(d) == 1:
+        d = '0' + d
+    m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
+    y = str(datetime.now().year)
+    res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-free-' + d + '-' + m + '-' + y)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    parts = soup.find_all('span')[28].getText().split()
+    title = 'The Hindu Epaper ' + parts[0] + '-'
+    for i in range(1, 13):
+        if datetime.strptime(str(i), '%m').strftime('%b') == parts[1]:
+            title += "{:02d}".format(i)
+            break
+    title += '-' + parts[2][:-1]
+    url = soup.find_all('a')[16].get('href')
+    return [title, url]
+
+
 @bot.event
 async def on_ready():
     print('Started')
@@ -41,23 +60,8 @@ async def called_once_a_day():
     await bot.get_channel(COUNTDOWN_CHANNEL).edit(name=str((prelims - today).days) + ' days to prelims!')
 
     # hindu
-    # res = requests.get('https://dailyepaper.in/home')
-    # soup = BeautifulSoup(res.text, 'html.parser')
-    # res = requests.get(soup.find_all('a')[9].get('href'))
-    d = str(datetime.now().day)
-    m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
-    y = str(datetime.now().year)
-    res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-free-' + d + '-' + m + '-' + y)
-    soup = BeautifulSoup(res.text, 'html.parser')
-    parts = soup.find_all('span')[28].getText().split()
-    title = 'The Hindu Epaper ' + parts[0] + '-'
-    for i in range(1, 13):
-        if datetime.strptime(str(i), '%m').strftime('%b') == parts[1]:
-            title += "{:02d}".format(i)
-            break
-    title += '-' + parts[2][:-1]
-    url = soup.find_all('a')[16].get('href')
-    embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
+    vals = hindu()
+    embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
     for i in THE_HINDU_CHANNELS:
         await bot.get_channel(i).send(embed=embedparam)
 
@@ -106,30 +110,16 @@ async def on_message(message):
                                  inline=False)
             embedparam.add_field(name='--send_hindu <Channel ID(s)>', value='Send The Hindu to channels immediately',
                                  inline=False)
-            embedparam.add_field(name='--send_vision <Channel ID(s)>', value='Send Vision IAS magazine to channels immediately',
+            embedparam.add_field(name='--send_vision <Channel ID(s)>',
+                                 value='Send Vision IAS magazine to channels immediately',
                                  inline=False)
             embedparam.add_field(name='--send_msg [<Channel ID(s)>] <message>',
                                  value='Send message to channels immediately', inline=False)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--hindu':
-        # res = requests.get('https://dailyepaper.in/home')
-        # soup = BeautifulSoup(res.text, 'html.parser')
-        # res = requests.get(soup.find_all('a')[9].get('href'))
-        d = str(datetime.now().day)
-        m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
-        y = str(datetime.now().year)
-        res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-free-' + d + '-' + m + '-' + y)
-        soup = BeautifulSoup(res.text, 'html.parser')
-        parts = soup.find_all('span')[28].getText().split()
-        title = 'The Hindu Epaper ' + parts[0] + '-'
-        for i in range(1, 13):
-            if datetime.strptime(str(i), '%m').strftime('%b') == parts[1]:
-                title += "{:02d}".format(i)
-                break
-        title += '-' + parts[2][:-1]
-        url = soup.find_all('a')[16].get('href')
-        embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
+        vals = hindu()
+        embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
         await message.channel.send(embed=embedparam)
         await message.delete()
 
@@ -178,23 +168,8 @@ async def on_message(message):
     elif message.content.startswith(
             '--send_hindu') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
         # hindu
-        # res = requests.get('https://dailyepaper.in/home')
-        # soup = BeautifulSoup(res.text, 'html.parser')
-        # res = requests.get(soup.find_all('a')[9].get('href'))
-        d = str(datetime.now().day)
-        m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
-        y = str(datetime.now().year)
-        res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-free-' + d + '-' + m + '-' + y)
-        soup = BeautifulSoup(res.text, 'html.parser')
-        parts = soup.find_all('span')[28].getText().split()
-        title = 'The Hindu Epaper ' + parts[0] + '-'
-        for i in range(1, 13):
-            if datetime.strptime(str(i), '%m').strftime('%b') == parts[1]:
-                title += "{:02d}".format(i)
-                break
-        title += '-' + parts[2][:-1]
-        url = soup.find_all('a')[16].get('href')
-        embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
+        vals = hindu()
+        embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
         for i in message.content.split()[1:]:
             await bot.get_channel(int(i)).send(embed=embedparam)
 
