@@ -26,22 +26,34 @@ secret_sheet = client.open('File Name').worksheet('Sheet Name')
 bot = discord.Client()
 
 
+# def hindu():
+#     d = str(datetime.now().day)
+#     if len(d) == 1:
+#         d = '0' + d
+#     m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
+#     y = str(datetime.now().year)
+#     res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-free-' + d + '-' + m + '-' + y)
+#     soup = BeautifulSoup(res.text, 'html.parser')
+#     parts = soup.find_all('span')[28].getText().split()
+#     title = 'The Hindu Epaper ' + parts[0] + '-'
+#     for i in range(1, 13):
+#         if datetime.strptime(str(i), '%m').strftime('%b') == parts[1]:
+#             title += "{:02d}".format(i)
+#             break
+#     title += '-' + parts[2][:-1]
+#     url = soup.find_all('a')[16].get('href')
+#     return [title, url]
+
 def hindu():
-    d = str(datetime.now().day)
-    if len(d) == 1:
-        d = '0' + d
     m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
     y = str(datetime.now().year)
-    res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-free-' + d + '-' + m + '-' + y)
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
+    res = requests.get('https://fresherwave.com/the-hindu-pdf-free-' + m + '-' + y, headers=headers)
     soup = BeautifulSoup(res.text, 'html.parser')
-    parts = soup.find_all('span')[28].getText().split()
-    title = 'The Hindu Epaper ' + parts[0] + '-'
-    for i in range(1, 13):
-        if datetime.strptime(str(i), '%m').strftime('%b') == parts[1]:
-            title += "{:02d}".format(i)
-            break
-    title += '-' + parts[2][:-1]
-    url = soup.find_all('a')[16].get('href')
+    dnld = soup.find('tr', attrs={'data-row_id': '0'})
+    title = 'The Hindu Epaper ' + dnld.find_all('td')[0].getText()
+    url = dnld.find_all('td')[1].getText()
     return [title, url]
 
 
