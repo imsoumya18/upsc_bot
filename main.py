@@ -14,6 +14,7 @@ DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Send Ch
 COUNTDOWN_CHANNEL = 'COUNTDOWN_CHANNEL_ID(int)'  # Countdown Channel ID
 THE_HINDU_CHANNELS = ['LIST OF THE HINDU CHANNEL IDS(int)']  # The Hindu Channel IDs
 VISION_IAS_CHANNELS = ['LIST OF VISION IAS CHANNEL IDS(int)']  # Vision IAS Channel IDs
+NEXT_IAS_CHANNELS = ['LIST OF NEXT IAS CHANNEL IDS(int)']  # Next IAS Channel IDs
 ANS_WRITING_RECORD_CHANNEL = 'ANSWER WRITING RECORD CHANNEL(int)'  # Answer Writing Record Channel
 WHEN = time(1, 30, 0)  # UTC Time
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/spreadsheets',
@@ -26,24 +27,6 @@ secret_sheet = client.open('File Name').worksheet('Sheet Name')
 bot = discord.Client()
 
 
-# def hindu():
-#     d = str(datetime.now().day)
-#     if len(d) == 1:
-#         d = '0' + d
-#     m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
-#     y = str(datetime.now().year)
-#     res = requests.get('https://dailyepaper.in/the-hindu-pdf-epaper-free-' + d + '-' + m + '-' + y)
-#     soup = BeautifulSoup(res.text, 'html.parser')
-#     parts = soup.find_all('span')[28].getText().split()
-#     title = 'The Hindu Epaper ' + parts[0] + '-'
-#     for i in range(1, 13):
-#         if datetime.strptime(str(i), '%m').strftime('%b') == parts[1]:
-#             title += "{:02d}".format(i)
-#             break
-#     title += '-' + parts[2][:-1]
-#     url = soup.find_all('a')[16].get('href')
-#     return [title, url]
-
 def hindu():
     m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
     y = str(datetime.now().year)
@@ -54,6 +37,23 @@ def hindu():
     dnld = soup.find('tr', attrs={'data-row_id': '0'})
     title = 'The Hindu Epaper ' + dnld.find_all('td')[0].getText()
     url = dnld.find_all('td')[1].getText()
+    return [title, url]
+
+
+def vision_ca():
+    res = requests.get('http://www.visionias.in/resources/current_affairs.php?c=ca')
+    soup = BeautifulSoup(res.text, 'html.parser')
+    title = 'Vision IAS Current Affairs ' + soup.find('a').getText().strip()
+    url = soup.find('a').get('href')
+    return [title, url]
+
+
+def next_mcq():
+    res = requests.get('https://www.nextias.com/montlhy-mcq')
+    soup = BeautifulSoup(res.text, 'html.parser')
+    element = soup.find("div", {"class": "table_inner_content_text"})
+    title = 'Next IAS MCQ ' + element.find('h6').getText()
+    url = element.find('a').get('href')
     return [title, url]
 
 
@@ -78,16 +78,22 @@ async def called_once_a_day():
         await bot.get_channel(i).send(embed=embedparam)
 
     # vision
-    res = requests.get('http://www.visionias.in/resources/current_affairs.php?c=ca')
-    soup = BeautifulSoup(res.text, 'html.parser')
-    title = 'Vision IAS Current Affairs ' + soup.find('a').getText().strip()
-    url = soup.find('a').get('href')
-    if title != secret_sheet.cell(1, 1).value:
-        embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
+    vals = vision_ca()
+    if vals[0] != secret_sheet.cell(1, 1).value:
+        embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
         for i in VISION_IAS_CHANNELS:
             await bot.get_channel(i).send(embed=embedparam)
         secret_sheet.delete_rows(1)
-        secret_sheet.insert_row([title], 1)
+        secret_sheet.insert_row([vals[0]], 1)
+
+    # next
+    vals = next_mcq()
+    if vals[0] != secret_sheet.cell(2, 1).value:
+        embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        for i in NEXT_IAS_CHANNELS:
+            await bot.get_channel(i).send(embed=embedparam)
+        secret_sheet.delete_rows(2)
+        secret_sheet.insert_row([vals[0]], 2)
 
 
 async def background_task():
@@ -113,6 +119,7 @@ async def on_message(message):
         embedparam = discord.Embed(title='--help', description='Get help', color=0x0addd7)
         embedparam.add_field(name='--hindu', value='Get latest The Hindu newspaper PDF', inline=False)
         embedparam.add_field(name='--vision', value='Get latest Vision IAS Current Affairs PDF', inline=False)
+        embedparam.add_field(name='--next', value='Get latest Next IAS Monthly MCQ PDF', inline=False)
         if message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
             embedparam.add_field(name='---------------Extras---------------', value='Extra commands for DEVELOPER ONLY',
                                  inline=False)
@@ -125,22 +132,31 @@ async def on_message(message):
             embedparam.add_field(name='--send_vision <Channel ID(s)>',
                                  value='Send Vision IAS magazine to channels immediately',
                                  inline=False)
+            embedparam.add_field(name='--send_next <Channel ID(s)>',
+                                 value='Send Next IAS MCQ to channels immediately',
+                                 inline=False)
             embedparam.add_field(name='--send_msg [<Channel ID(s)>] <message>',
                                  value='Send message to channels immediately', inline=False)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--hindu':
+        # hindu
         vals = hindu()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
         await message.channel.send(embed=embedparam)
         await message.delete()
 
     elif message.content.lower() == '--vision':
-        res = requests.get('http://www.visionias.in/resources/current_affairs.php?c=ca')
-        soup = BeautifulSoup(res.text, 'html.parser')
-        title = 'Vision IAS Current Affairs ' + soup.find('a').getText().strip()
-        url = soup.find('a').get('href')
-        embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
+        # vision
+        vals = vision_ca()
+        embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        await message.channel.send(embed=embedparam)
+        await message.delete()
+
+    elif message.content.lower() == '--next':
+        # next
+        vals = next_mcq()
+        embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
         await message.channel.send(embed=embedparam)
         await message.delete()
 
@@ -188,11 +204,16 @@ async def on_message(message):
     elif message.content.startswith(
             '--send_vision') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
         # vision
-        res = requests.get('http://www.visionias.in/resources/current_affairs.php?c=ca')
-        soup = BeautifulSoup(res.text, 'html.parser')
-        title = 'Vision IAS Current Affairs ' + soup.find('a').getText().strip()
-        url = soup.find('a').get('href')
-        embedparam = discord.Embed(title=title, description='[Download]({})'.format(url), color=0x0addd7)
+        vals = vision_ca()
+        embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        for i in message.content.split()[1:]:
+            await bot.get_channel(int(i)).send(embed=embedparam)
+
+    elif message.content.startswith(
+            '--send_next') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
+        # next
+        vals = next_mcq()
+        embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
         for i in message.content.split()[1:]:
             await bot.get_channel(int(i)).send(embed=embedparam)
 
