@@ -8,7 +8,7 @@
 
 **HOWEVER,**<br>If you are preparing for UPSC Civil Service Examination too, then you know the need of daily newspaper and magazine reading, as it carries a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspaper, magazine by visiting some websites. Why to waste time searching on Google? Here is a quick solution.
 
-**JUST ADD THIS BOT TO YOUR SERVER & TYPE<br>`--hindu` FOR DAILY THE HINDU NEWSPAPER<br>`--vision` FOR MONTHLY Vision IAS Current Affairs<br>`--help` FOR HELP<br>LET'S WORK SMARTER, NOT ONLY HARDER!!😎**
+**JUST ADD THIS BOT TO YOUR SERVER & TYPE<br>`--hindu` FOR DAILY THE HINDU NEWSPAPER<br>`--vision` FOR MONTHLY Vision IAS CURRENT AFFAIRS<br>`--next` FOR MONTHLY NEXT IAS MCQ<br>`--help` FOR HELP<br>LET'S WORK SMARTER, NOT ONLY HARDER!!😎**
 
 **CURRENTLY, THE BOT IS SENDING THE HINDU DAILY AUTOMATICALLY WITHOUT THE NEED OF ANY COMMAND @7:00 AM IST TO SOME SPECIFIC CHANNELS WHICH ARE ENROLLED. TO ENROLL YOUR CHANNEL FOR THIS DAILY AUTOMATIC SCHEDULE, SEND ME YOUR CHANNEL ID VIA MAIL(soumyadeep184@gmail.com).**
 
