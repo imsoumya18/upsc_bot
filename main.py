@@ -28,11 +28,15 @@ bot = discord.Client()
 
 
 def hindu():
-    d = datetime.today().day
-    m = datetime.strptime(str(datetime.now().month), '%m').strftime('%B').lower()
+    m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
     y = str(datetime.now().year)
-    title = 'The Hindu Epaper ' + str(d) + '-' + str(datetime.today().month) + '-' + str(y)
-    url = 'https://edumo.in/wp-content/uploads/2021/' + str(datetime.today().month) + '/the-hindu-newspaper-pdf-' + str(d) + '-' + m + '-' + y + '.pdf'
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
+    res = requests.get('https://fresherwave.com/the-hindu-pdf-free-' + m + '-' + y, headers=headers)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    dnld = soup.find('tr', attrs={'data-row_id': '0'})
+    title = 'The Hindu Epaper ' + dnld.find_all('td')[0].getText()
+    url = dnld.find_all('td')[1].getText()
     return [title, url]
 
 
