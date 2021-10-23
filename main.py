@@ -165,8 +165,9 @@ async def on_message(message):
 
     elif message.content.lower() == '--servers' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
         servers = []
+        i = 0
         async for guild in bot.fetch_guilds(limit=150):
-            servers.append(guild.name)
+            servers.append(str(i+1) + '. ' + repr(guild))
         embedparam = discord.Embed(title='Server List', description='\n'.join(servers), color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
