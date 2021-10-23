@@ -168,6 +168,7 @@ async def on_message(message):
         i = 0
         async for guild in bot.fetch_guilds(limit=150):
             servers.append(str(i+1) + '. ' + repr(guild))
+            i += 1
         embedparam = discord.Embed(title='Server List', description='\n'.join(servers), color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
