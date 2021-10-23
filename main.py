@@ -85,6 +85,7 @@ async def called_once_a_day():
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
         for i in VISION_IAS_CHANNELS:
             await bot.get_channel(i).send(embed=embedparam)
+        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send('Vision IAS sent to: ' + ' '.join(list(map(str, VISION_IAS_CHANNELS))))
         secret_sheet.delete_rows(1)
         secret_sheet.insert_row([vals[0]], 1)
 
@@ -94,6 +95,7 @@ async def called_once_a_day():
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
         for i in NEXT_IAS_CHANNELS:
             await bot.get_channel(i).send(embed=embedparam)
+        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send('Next IAS sent to: ' + ' '.join(list(map(str, NEXT_IAS_CHANNELS))))
         secret_sheet.delete_rows(2)
         secret_sheet.insert_row([vals[0]], 2)
 
