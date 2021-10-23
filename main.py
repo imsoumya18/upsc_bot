@@ -11,6 +11,7 @@ DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
 DEVELOPER_PRIVATE_CHANNEL = 'DEVELOPER_PRIVATE_CHANNEL_ID(int)'  # Developer's Private Channel ID
 PUSH_LOGS_CHANNEL = 'PUSH_LOGS_CHANNEL_ID(int)'  # Push Logs Channel ID
 DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Send Channel ID
+REQUEST_CHANNEL = 'ADD_REQUESTS_CHANNEL_ID(int)'  # Add Requests Channel
 COUNTDOWN_CHANNEL = 'COUNTDOWN_CHANNEL_ID(int)'  # Countdown Channel ID
 THE_HINDU_CHANNELS = ['LIST OF THE HINDU CHANNEL IDS(int)']  # The Hindu Channel IDs
 VISION_IAS_CHANNELS = ['LIST OF VISION IAS CHANNEL IDS(int)']  # Vision IAS Channel IDs
@@ -120,6 +121,9 @@ async def on_message(message):
         embedparam.add_field(name='--hindu', value='Get latest The Hindu newspaper PDF', inline=False)
         embedparam.add_field(name='--vision', value='Get latest Vision IAS Current Affairs PDF', inline=False)
         embedparam.add_field(name='--next', value='Get latest Next IAS Monthly MCQ PDF', inline=False)
+        embedparam.add_field(name='--add_hindu', value='Add the channel to get daily The Hindu', inline=False)
+        embedparam.add_field(name='--add_vision', value='Add the channel to get monthly Vision IAS Magazine', inline=False)
+        embedparam.add_field(name='--add_next', value='Add the channel to get monthly Next IAS MCQ PDF', inline=False)
         if message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
             embedparam.add_field(name='---------------Extras---------------', value='Extra commands for DEVELOPER ONLY',
                                  inline=False)
@@ -159,6 +163,21 @@ async def on_message(message):
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
         await message.channel.send(embed=embedparam)
         await message.delete()
+
+    elif message.content.lower() == '--add_hindu':
+        await bot.get_channel(REQUEST_CHANNEL).send('The Hindu Add Request: ' + str(message.channel.id))
+        embedparam = discord.Embed(title='Channel Added', description='This Hindu will be sent daily in this channel as soon as developer approves', color=0x0addd7)
+        await message.channel.send(embed=embedparam)
+
+    elif message.content.lower() == '--add_vision':
+        await bot.get_channel(REQUEST_CHANNEL).send('Vision IAS Add Request: ' + str(message.channel.id))
+        embedparam = discord.Embed(title='Channel Added', description='Vision IAS Magazine will be sent monthly in this channel as soon as developer approves', color=0x0addd7)
+        await message.channel.send(embed=embedparam)
+
+    elif message.content.lower() == '--add_next':
+        await bot.get_channel(REQUEST_CHANNEL).send('Next IAS Add Request: ' + str(message.channel.id))
+        embedparam = discord.Embed(title='Channel Added', description='Next IAS MCQ will be sent monthly in this channel as soon as developer approves', color=0x0addd7)
+        await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--ping' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
         await message.channel.send('--pong')
