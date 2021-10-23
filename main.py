@@ -165,17 +165,26 @@ async def on_message(message):
         await message.delete()
 
     elif message.content.lower() == '--add_hindu':
-        await bot.get_channel(REQUEST_CHANNEL).send('The Hindu Add Request: ' + str(message.channel.id))
+        embedparam = discord.Embed(title='The Hindu Add Request', description=str(message.channel.id), color=0x0addd7)
+        embedparam.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam.add_field(name='Server name', value=str(message.author.guild.name))
+        await bot.get_channel(REQUEST_CHANNEL).send(embed=embedparam)
         embedparam = discord.Embed(title='Channel Added', description='This Hindu will be sent daily in this channel as soon as developer approves', color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--add_vision':
-        await bot.get_channel(REQUEST_CHANNEL).send('Vision IAS Add Request: ' + str(message.channel.id))
+        embedparam = discord.Embed(title='Vision IAS Add Request', description=str(message.channel.id), color=0x0addd7)
+        embedparam.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam.add_field(name='Server name', value=str(message.author.guild.name))
+        await bot.get_channel(REQUEST_CHANNEL).send(embed=embedparam)
         embedparam = discord.Embed(title='Channel Added', description='Vision IAS Magazine will be sent monthly in this channel as soon as developer approves', color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--add_next':
-        await bot.get_channel(REQUEST_CHANNEL).send('Next IAS Add Request: ' + str(message.channel.id))
+        embedparam = discord.Embed(title='Next IAS Add Request', description=str(message.channel.id), color=0x0addd7)
+        embedparam.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam.add_field(name='Server name', value=str(message.author.guild.name))
+        await bot.get_channel(REQUEST_CHANNEL).send(embed=embedparam)
         embedparam = discord.Embed(title='Channel Added', description='Next IAS MCQ will be sent monthly in this channel as soon as developer approves', color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
