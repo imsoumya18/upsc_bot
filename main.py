@@ -77,6 +77,7 @@ async def called_once_a_day():
     embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
     for i in THE_HINDU_CHANNELS:
         await bot.get_channel(i).send(embed=embedparam)
+    await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send('The Hindu sent to: ' + ' '.join(list(map(str, THE_HINDU_CHANNELS))))
 
     # vision
     vals = vision_ca()
