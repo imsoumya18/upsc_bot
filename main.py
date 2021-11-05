@@ -76,25 +76,40 @@ async def on_ready():
 async def called_once_a_day():
     await bot.wait_until_ready()
 
-    # countdown
-    prelims = datetime(2023, 6, 1)
-    today = datetime.today()
-    await bot.get_channel(COUNTDOWN_CHANNEL).edit(name=str((prelims - today).days) + ' days to prelims!')
-
     # hindu
     vals = hindu()
     embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+    sent = []
+    failed = []
     for i in THE_HINDU_CHANNELS:
-        await bot.get_channel(i).send(embed=embedparam)
-    await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send('The Hindu sent to: ' + ' '.join(list(map(str, THE_HINDU_CHANNELS))))
+        try:
+            await bot.get_channel(i).send(embed=embedparam)
+            sent.append(str(i))
+        except:
+            failed.append(str(i))
+            continue
+    embedparam2 = discord.Embed(title='Hindu sent to :white_check_mark:', description=' '.join(sent), color=0x0addd7)
+    if len(failed) != 0:
+        embedparam2.add_field(name='Failed :no_entry_sign:', value=' '.join(failed))
+    await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
 
     # vision
     vals = vision_ca()
     if vals[0] != secret_sheet.cell(1, 1).value:
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        sent = []
+        failed = []
         for i in VISION_IAS_CHANNELS:
-            await bot.get_channel(i).send(embed=embedparam)
-        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send('Vision IAS sent to: ' + ' '.join(list(map(str, VISION_IAS_CHANNELS))))
+            try:
+                await bot.get_channel(i).send(embed=embedparam)
+                sent.append(str(i))
+            except:
+                failed.append(str(i))
+                continue
+        embedparam2 = discord.Embed(title='Vision IAS sent to :white_check_mark:', description=' '.join(sent), color=0x0addd7)
+        if len(failed) != 0:
+            embedparam2.add_field(name='Failed :no_entry_sign:', value=' '.join(failed))
+        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
         secret_sheet.delete_rows(1)
         secret_sheet.insert_row([vals[0]], 1)
 
@@ -102,11 +117,26 @@ async def called_once_a_day():
     vals = next_mcq()
     if vals[0] != secret_sheet.cell(2, 1).value:
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        sent = []
+        failed = []
         for i in NEXT_IAS_CHANNELS:
-            await bot.get_channel(i).send(embed=embedparam)
-        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send('Next IAS sent to: ' + ' '.join(list(map(str, NEXT_IAS_CHANNELS))))
+            try:
+                await bot.get_channel(i).send(embed=embedparam)
+                sent.append(str(i))
+            except:
+                failed.append(str(i))
+                continue
+        embedparam2 = discord.Embed(title='Next IAS sent to :white_check_mark:', description=' '.join(sent), color=0x0addd7)
+        if len(failed) != 0:
+            embedparam2.add_field(name='Failed :no_entry_sign:', value=' '.join(failed))
+        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
         secret_sheet.delete_rows(2)
         secret_sheet.insert_row([vals[0]], 2)
+
+    # countdown
+    prelims = datetime(2023, 6, 1)
+    today = datetime.today()
+    await bot.get_channel(COUNTDOWN_CHANNEL).edit(name=str((prelims - today).days) + ' days to prelims!')
 
 
 async def background_task():
@@ -159,21 +189,33 @@ async def on_message(message):
         # hindu
         vals = hindu()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        embedparam2 = discord.Embed(title='The Hindu Request :white_check_mark:', description=str(message.channel.id), color=0x0addd7)
+        embedparam2.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam2.add_field(name='Server name', value=str(message.author.guild.name))
         await message.channel.send(embed=embedparam)
+        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
         await message.delete()
 
     elif message.content.lower() == '--vision':
         # vision
         vals = vision_ca()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        embedparam2 = discord.Embed(title='Vision IAS Request :white_check_mark:', description=str(message.channel.id), color=0x0addd7)
+        embedparam2.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam2.add_field(name='Server name', value=str(message.author.guild.name))
         await message.channel.send(embed=embedparam)
+        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
         await message.delete()
 
     elif message.content.lower() == '--next':
         # next
         vals = next_mcq()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        embedparam2 = discord.Embed(title='Next IAS Request :white_check_mark:', description=str(message.channel.id), color=0x0addd7)
+        embedparam2.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam2.add_field(name='Server name', value=str(message.author.guild.name))
         await message.channel.send(embed=embedparam)
+        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
         await message.delete()
 
     elif message.content.lower() == '--add_hindu':
@@ -240,24 +282,57 @@ async def on_message(message):
         # hindu
         vals = hindu()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        sent = []
+        failed = []
         for i in message.content.split()[1:]:
-            await bot.get_channel(int(i)).send(embed=embedparam)
+            try:
+                await bot.get_channel(int(i)).send(embed=embedparam)
+                sent.append(i)
+            except:
+                failed.append(i)
+                continue
+        embedparam2 = discord.Embed(title='Hindu sent to :white_check_mark:', description=' '.join(sent), color=0x0addd7)
+        if len(failed) != 0:
+            embedparam2.add_field(name='Failed :no_entry_sign:', value=' '.join(failed))
+        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
 
     elif message.content.startswith(
             '--send_vision') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
         # vision
         vals = vision_ca()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        sent = []
+        failed = []
         for i in message.content.split()[1:]:
-            await bot.get_channel(int(i)).send(embed=embedparam)
+            try:
+                await bot.get_channel(int(i)).send(embed=embedparam)
+                sent.append(i)
+            except:
+                failed.append(i)
+                continue
+        embedparam2 = discord.Embed(title='Vision IAS sent to :white_check_mark:', description=' '.join(sent), color=0x0addd7)
+        if len(failed) != 0:
+            embedparam2.add_field(name='Failed :no_entry_sign:', value=' '.join(failed))
+        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
 
     elif message.content.startswith(
             '--send_next') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
         # next
         vals = next_mcq()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        sent = []
+        failed = []
         for i in message.content.split()[1:]:
-            await bot.get_channel(int(i)).send(embed=embedparam)
+            try:
+                await bot.get_channel(int(i)).send(embed=embedparam)
+                sent.append(i)
+            except:
+                failed.append(i)
+                continue
+        embedparam2 = discord.Embed(title='Next IAS sent to :white_check_mark:', description=' '.join(sent), color=0x0addd7)
+        if len(failed) != 0:
+            embedparam2.add_field(name='Failed :no_entry_sign:', value=' '.join(failed))
+        await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
 
     elif message.content.startswith(
             '--send_msg') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
