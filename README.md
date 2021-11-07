@@ -2,7 +2,7 @@
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
-# Discord Bot for Daily The Hindu Newspaper PDF
+# Discord Bot for Daily The Hindu, Monthly Vision IAS & Next IAS PDF
 
 **TO BE HONEST,**<br>I've built this bot primarily for my own UPSC preparation and thought why not sharing with you guys?🤔
 
@@ -10,13 +10,9 @@
 
 **JUST ADD THIS BOT TO YOUR SERVER & TYPE<br>`--hindu` FOR DAILY THE HINDU NEWSPAPER<br>`--vision` FOR MONTHLY Vision IAS CURRENT AFFAIRS<br>`--next` FOR MONTHLY NEXT IAS MCQ<br>`--help` FOR HELP<br>LET'S WORK SMARTER, NOT ONLY HARDER!!😎**
 
-**CURRENTLY, THE BOT IS SENDING THE HINDU DAILY AUTOMATICALLY WITHOUT THE NEED OF ANY COMMAND @7:00 AM IST TO SOME SPECIFIC CHANNELS WHICH ARE ENROLLED. TO ENROLL YOUR CHANNEL FOR THIS DAILY AUTOMATIC SCHEDULE, SEND ME YOUR CHANNEL ID VIA MAIL(soumyadeep184@gmail.com).**
+**CURRENTLY, THE BOT IS SENDING THE HINDU DAILY, VISION IAS & NEXT IAS CURRENT AFFAIRS MONTHLY AUTOMATICALLY WITHOUT THE NEED OF ANY COMMAND @7:20 AM IST TO SOME SPECIFIC CHANNELS WHICH ARE ENROLLED. TO ENROLL YOUR CHANNEL FOR THIS AUTOMATIC SCHEDULE, TYPE `--add_hindu`, `--add_vision`, `--add_next` FOR THE HINDU, VISION IAS, NEXT IAS RESPECTIVELY.**
 
-Don't know how to get channel ID? Don't worry. Find it [here.](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-)
-
-**MONTHLY SCHEDULING FOR YOJANA MAGAZINE IS NOW IN BETA MODE, YOU ALL WILL BE NOTIFIED ONCE IT'S RELEASED.**
-
-To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=534723946560&scope=bot)
+To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=534723950656&scope=bot)
 
 ***जय हिन्द***
 
@@ -28,4 +24,3 @@ Any type of feedback is appreciated: soumyadeep184@gmail.com
 
  **SUPPORT ME:**
  - UPI: soumyadeep184@okaxis.com
- - QR: <img src="https://github.com/imsoumya18/cv/blob/master/images/UPI.jpg" height="120" width="120" style="border-left: 130px">
