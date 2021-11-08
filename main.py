@@ -29,25 +29,33 @@ bot = discord.Client()
 
 
 def hindu():
-    d = str(datetime.now().day)
-    if len(d) == 1:
-        d = '0' + d
-    m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
-    y = str(datetime.now().year)
+    title = 'The Hindu Epaper ' + '-'.join(
+        list(map(str, [datetime.today().day, datetime.today().month, datetime.today().year])))
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
-    res = requests.get('https://dailyepaper.in/the-hindu-pdf-newspaper-download-' + d + '-' + m + '-' + y,
-                       headers=headers)
-    soup = BeautifulSoup(res.text, 'html.parser')
-    parts = soup.find_all('span')[28].getText().split()
-    title = 'The Hindu Epaper ' + parts[0] + '-'
-    for i in range(1, 13):
-        if datetime.strptime(str(i), '%m').strftime('%b') == parts[1]:
-            title += "{:02d}".format(i)
-            break
-    title += '-' + parts[2][:-1]
-    url = soup.find_all('a')[16].get('href')
-    return [title, url]
+    try:
+        res = requests.get('https://www.fresherwav.com/download-the-hindu-pdf-epaper-free-today/', headers=headers)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        dnld = soup.find('tr', attrs={'data-row_id': '0'})
+        url1 = dnld.find_all('td')[1].getText()
+    except:
+        url1 = ''
+
+    try:
+        d = str(datetime.now().day)
+        if len(d) == 1:
+            d = '0' + d
+        m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
+        y = str(datetime.now().year)
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
+        res = requests.get('https://dailyepaper.in/the-hindu-pdf-free-download-' + d + '-' + m + '-' + y, headers=headers)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        url2 = soup.find_all('a')[16].get('href')
+    except:
+        url2 = ''
+
+    return [title, url1, url2]
 
 
 def vision_ca():
@@ -79,6 +87,7 @@ async def called_once_a_day():
     # hindu
     vals = hindu()
     embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+    embedparam.add_field(name='Alternative Link', value='[Download]({})'.format(vals[2]))
     sent = []
     failed = []
     for i in THE_HINDU_CHANNELS:
@@ -189,6 +198,7 @@ async def on_message(message):
         # hindu
         vals = hindu()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        embedparam.add_field(name='Alternative Link', value='[Download]({})'.format(vals[2]))
         embedparam2 = discord.Embed(title='The Hindu Request :white_check_mark:', description=str(message.channel.id), color=0x0addd7)
         embedparam2.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
         embedparam2.add_field(name='Server name', value=str(message.author.guild.name))
@@ -282,6 +292,7 @@ async def on_message(message):
         # hindu
         vals = hindu()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
+        embedparam.add_field(name='Alternative Link', value='[Download]({})'.format(vals[2]))
         sent = []
         failed = []
         for i in message.content.split()[1:]:
