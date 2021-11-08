@@ -34,7 +34,7 @@ def hindu():
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
     try:
-        res = requests.get('https://www.fresherwav.com/download-the-hindu-pdf-epaper-free-today/', headers=headers)
+        res = requests.get('https://www.fresherwave.com/download-the-hindu-pdf-epaper-free-today/', headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
         dnld = soup.find('tr', attrs={'data-row_id': '0'})
         url1 = dnld.find_all('td')[1].getText()
