@@ -12,7 +12,9 @@
 
 **CURRENTLY, THE BOT IS SENDING THE HINDU DAILY, VISION IAS & NEXT IAS CURRENT AFFAIRS MONTHLY AUTOMATICALLY WITHOUT THE NEED OF ANY COMMAND @7:20 AM IST TO SOME SPECIFIC CHANNELS WHICH ARE ENROLLED. TO ENROLL YOUR CHANNEL FOR THIS AUTOMATIC SCHEDULE, TYPE `--add_hindu`, `--add_vision`, `--add_next` FOR THE HINDU, VISION IAS, NEXT IAS RESPECTIVELY.**
 
-To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=534723950656&scope=bot)
+### 🔗 To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=534723950656&scope=bot)
+
+### 🎯 Server count: `15`
 
 ***जय हिन्द***
 
