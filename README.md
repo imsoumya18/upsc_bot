@@ -15,8 +15,8 @@
 ### 🔗 To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=534723950656&scope=bot)
 
 ### 🎯 Server count: `15`
-:grinning:
-***जय हिन्द ***
+
+***जय हिन्द*** :india:
 
 Any type of feedback is appreciated: soumyadeep184@gmail.com
 
