@@ -2,7 +2,7 @@ import discord
 import asyncio
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime, time, timedelta
+from datetime import datetime, date, time, timedelta
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
@@ -17,7 +17,7 @@ THE_HINDU_CHANNELS = ['LIST OF THE HINDU CHANNEL IDS(int)']  # The Hindu Channel
 VISION_IAS_CHANNELS = ['LIST OF VISION IAS CHANNEL IDS(int)']  # Vision IAS Channel IDs
 NEXT_IAS_CHANNELS = ['LIST OF NEXT IAS CHANNEL IDS(int)']  # Next IAS Channel IDs
 ANS_WRITING_RECORD_CHANNEL = 'ANSWER WRITING RECORD CHANNEL(int)'  # Answer Writing Record Channel
-WHEN = time(1, 30, 0)  # UTC Time
+WHEN = (datetime.combine(date.today(), time(7, 00, 00)) + timedelta(hours=-5, minutes=-30)).time()  # IST Time
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/spreadsheets',
          'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
