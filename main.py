@@ -31,25 +31,30 @@ bot = discord.Client()
 def hindu():
     title = 'The Hindu Epaper ' + '-'.join(
         list(map(str, [datetime.today().day, datetime.today().month, datetime.today().year])))
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
+
     try:
-        res = requests.get('https://www.fresherwave.com/download-the-hindu-pdf-epaper-free-today/', headers=headers)
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
+        res = requests.get('https://dailyepaper.in/home-point', headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
-        dnld = soup.find('tr', attrs={'data-row_id': '0'})
-        url1 = dnld.find_all('td')[1].getText()
+        th_page = soup.find_all('tbody')[1].find('a').get('href')
+        res = requests.get(th_page, headers=headers)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        urls = soup.find_all('a')
+        for i in urls:
+            if i.getText() == 'Download':
+                url1 = i.get('href')
+                break
     except:
         url1 = ''
 
     try:
-        d = str(datetime.now().day)
-        if len(d) == 1:
-            d = '0' + d
-        m = datetime.strptime(str(datetime.now().month), '%m').strftime('%b').lower()
-        y = str(datetime.now().year)
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
-        res = requests.get('https://dailyepaper.in/the-hindu-pdf-free-download-' + d + '-' + m + '-' + y, headers=headers)
+        res = requests.get('https://dailyepaper.in/home-point', headers=headers)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        th_page = soup.find_all('tbody')[1].find('a').get('href')
+        res = requests.get(th_page, headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
         urls = soup.find_all('a')
         for i in urls:
@@ -119,7 +124,8 @@ async def called_once_a_day():
             except:
                 failed.append(str(i))
                 continue
-        embedparam2 = discord.Embed(title='Vision IAS sent to :white_check_mark:', description=' '.join(sent), color=0x0addd7)
+        embedparam2 = discord.Embed(title='Vision IAS sent to :white_check_mark:', description=' '.join(sent),
+                                    color=0x0addd7)
         if len(failed) != 0:
             embedparam2.add_field(name='Failed :no_entry_sign:', value=' '.join(failed))
         await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
@@ -139,7 +145,8 @@ async def called_once_a_day():
             except:
                 failed.append(str(i))
                 continue
-        embedparam2 = discord.Embed(title='Next IAS sent to :white_check_mark:', description=' '.join(sent), color=0x0addd7)
+        embedparam2 = discord.Embed(title='Next IAS sent to :white_check_mark:', description=' '.join(sent),
+                                    color=0x0addd7)
         if len(failed) != 0:
             embedparam2.add_field(name='Failed :no_entry_sign:', value=' '.join(failed))
         await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
@@ -177,15 +184,14 @@ async def on_message(message):
         embedparam.add_field(name='--vision', value='Get latest Vision IAS Current Affairs PDF', inline=False)
         embedparam.add_field(name='--next', value='Get latest Next IAS Monthly MCQ PDF', inline=False)
         embedparam.add_field(name='--add_hindu', value='Add the channel to get daily The Hindu', inline=False)
-        embedparam.add_field(name='--add_vision', value='Add the channel to get monthly Vision IAS Magazine', inline=False)
+        embedparam.add_field(name='--add_vision', value='Add the channel to get monthly Vision IAS Magazine',
+                             inline=False)
         embedparam.add_field(name='--add_next', value='Add the channel to get monthly Next IAS MCQ PDF', inline=False)
         if message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
             embedparam.add_field(name='---------------Extras---------------', value='Extra commands for DEVELOPER ONLY',
                                  inline=False)
             embedparam.add_field(name='--ping', value='Check connection', inline=False)
             embedparam.add_field(name='--servers', value='Get all servers list', inline=False)
-            embedparam.add_field(name='--q <Question No>', value='Update Mains Answer Writing in Spreadsheet',
-                                 inline=False)
             embedparam.add_field(name='--send_hindu <Channel ID(s)>', value='Send The Hindu to channels immediately',
                                  inline=False)
             embedparam.add_field(name='--send_vision <Channel ID(s)>',
@@ -193,6 +199,9 @@ async def on_message(message):
                                  inline=False)
             embedparam.add_field(name='--send_next <Channel ID(s)>',
                                  value='Send Next IAS MCQ to channels immediately',
+                                 inline=False)
+            embedparam.add_field(name='--resend',
+                                 value='Resend all to all channels immediately',
                                  inline=False)
             embedparam.add_field(name='--send_msg [<Channel ID(s)>] <message>',
                                  value='Send message to channels immediately', inline=False)
@@ -203,8 +212,10 @@ async def on_message(message):
         vals = hindu()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
         embedparam.add_field(name='Alternative Link', value='[Download]({})'.format(vals[2]))
-        embedparam2 = discord.Embed(title='The Hindu Request :white_check_mark:', description=str(message.channel.id), color=0x0addd7)
-        embedparam2.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam2 = discord.Embed(title='The Hindu Request :white_check_mark:', description=str(message.channel.id),
+                                    color=0x0addd7)
+        embedparam2.add_field(name='Requested By',
+                              value=str(message.author.name) + '#' + str(message.author.discriminator))
         embedparam2.add_field(name='Server name', value=str(message.author.guild.name))
         await message.channel.send(embed=embedparam)
         await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
@@ -214,8 +225,10 @@ async def on_message(message):
         # vision
         vals = vision_ca()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
-        embedparam2 = discord.Embed(title='Vision IAS Request :white_check_mark:', description=str(message.channel.id), color=0x0addd7)
-        embedparam2.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam2 = discord.Embed(title='Vision IAS Request :white_check_mark:', description=str(message.channel.id),
+                                    color=0x0addd7)
+        embedparam2.add_field(name='Requested By',
+                              value=str(message.author.name) + '#' + str(message.author.discriminator))
         embedparam2.add_field(name='Server name', value=str(message.author.guild.name))
         await message.channel.send(embed=embedparam)
         await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
@@ -225,8 +238,10 @@ async def on_message(message):
         # next
         vals = next_mcq()
         embedparam = discord.Embed(title=vals[0], description='[Download]({})'.format(vals[1]), color=0x0addd7)
-        embedparam2 = discord.Embed(title='Next IAS Request :white_check_mark:', description=str(message.channel.id), color=0x0addd7)
-        embedparam2.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam2 = discord.Embed(title='Next IAS Request :white_check_mark:', description=str(message.channel.id),
+                                    color=0x0addd7)
+        embedparam2.add_field(name='Requested By',
+                              value=str(message.author.name) + '#' + str(message.author.discriminator))
         embedparam2.add_field(name='Server name', value=str(message.author.guild.name))
         await message.channel.send(embed=embedparam)
         await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
@@ -234,26 +249,35 @@ async def on_message(message):
 
     elif message.content.lower() == '--add_hindu':
         embedparam = discord.Embed(title='The Hindu Add Request', description=str(message.channel.id), color=0x0addd7)
-        embedparam.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam.add_field(name='Requested By',
+                             value=str(message.author.name) + '#' + str(message.author.discriminator))
         embedparam.add_field(name='Server name', value=str(message.author.guild.name))
         await bot.get_channel(REQUEST_CHANNEL).send(embed=embedparam)
-        embedparam = discord.Embed(title='Channel Added', description='This Hindu will be sent daily in this channel as soon as developer approves', color=0x0addd7)
+        embedparam = discord.Embed(title='Channel Added',
+                                   description='This Hindu will be sent daily in this channel as soon as developer approves',
+                                   color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--add_vision':
         embedparam = discord.Embed(title='Vision IAS Add Request', description=str(message.channel.id), color=0x0addd7)
-        embedparam.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam.add_field(name='Requested By',
+                             value=str(message.author.name) + '#' + str(message.author.discriminator))
         embedparam.add_field(name='Server name', value=str(message.author.guild.name))
         await bot.get_channel(REQUEST_CHANNEL).send(embed=embedparam)
-        embedparam = discord.Embed(title='Channel Added', description='Vision IAS Magazine will be sent monthly in this channel as soon as developer approves', color=0x0addd7)
+        embedparam = discord.Embed(title='Channel Added',
+                                   description='Vision IAS Magazine will be sent monthly in this channel as soon as developer approves',
+                                   color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--add_next':
         embedparam = discord.Embed(title='Next IAS Add Request', description=str(message.channel.id), color=0x0addd7)
-        embedparam.add_field(name='Requested By', value=str(message.author.name) + '#' + str(message.author.discriminator))
+        embedparam.add_field(name='Requested By',
+                             value=str(message.author.name) + '#' + str(message.author.discriminator))
         embedparam.add_field(name='Server name', value=str(message.author.guild.name))
         await bot.get_channel(REQUEST_CHANNEL).send(embed=embedparam)
-        embedparam = discord.Embed(title='Channel Added', description='Next IAS MCQ will be sent monthly in this channel as soon as developer approves', color=0x0addd7)
+        embedparam = discord.Embed(title='Channel Added',
+                                   description='Next IAS MCQ will be sent monthly in this channel as soon as developer approves',
+                                   color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
     elif message.content.lower() == '--ping' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
@@ -263,32 +287,9 @@ async def on_message(message):
         servers = []
         i = 0
         async for guild in bot.fetch_guilds(limit=150):
-            servers.append(str(i+1) + '. ' + repr(guild))
+            servers.append(str(i + 1) + '. ' + repr(guild))
             i += 1
         embedparam = discord.Embed(title='Server List', description='\n'.join(servers), color=0x0addd7)
-        await message.channel.send(embed=embedparam)
-
-    elif message.content.startswith(
-            '--q') and message.author.id == DEVELOPER_ID and message.channel.id == ANS_WRITING_RECORD_CHANNEL:
-        x = int(message.content.split()[1])
-        res = requests.get('https://www.drishtiias.com/mains-practice-question/question-' + str(x))
-        soup = BeautifulSoup(res.text, 'html.parser')
-        paper = soup.find('span', {'class': 'paper-span'}).find_all('a')[0].getText().strip()
-        paper = paper.split()[0] + paper.split()[2]
-        topic = soup.find('span', {'class': 'paper-span'}).find_all('a')[1].getText().strip()
-        if str(x) in sheet.col_values(1)[2:]:
-            embedparam = discord.Embed(title='Question Already Done', description=', '.join(sheet.col_values(1)[2:]),
-                                       color=0x0addd7)
-        else:
-            i = 3
-            while x > int(sheet.cell(i, 1).value):
-                i += 1
-                if sheet.cell(i, 1).value is None:
-                    break
-            data = [x, paper, topic]
-            sheet.insert_row(data, i)
-            embedparam = discord.Embed(title='All Questions Till Now', description=', '.join(sheet.col_values(1)[2:]),
-                                       color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
     elif message.content.startswith(
@@ -306,7 +307,8 @@ async def on_message(message):
             except:
                 failed.append(i)
                 continue
-        embedparam2 = discord.Embed(title='Hindu sent to :white_check_mark:', description=' '.join(sent), color=0x0addd7)
+        embedparam2 = discord.Embed(title='Hindu sent to :white_check_mark:', description=' '.join(sent),
+                                    color=0x0addd7)
         if len(failed) != 0:
             embedparam2.add_field(name='Failed :no_entry_sign:', value=' '.join(failed))
         await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
@@ -325,7 +327,8 @@ async def on_message(message):
             except:
                 failed.append(i)
                 continue
-        embedparam2 = discord.Embed(title='Vision IAS sent to :white_check_mark:', description=' '.join(sent), color=0x0addd7)
+        embedparam2 = discord.Embed(title='Vision IAS sent to :white_check_mark:', description=' '.join(sent),
+                                    color=0x0addd7)
         if len(failed) != 0:
             embedparam2.add_field(name='Failed :no_entry_sign:', value=' '.join(failed))
         await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
@@ -344,10 +347,14 @@ async def on_message(message):
             except:
                 failed.append(i)
                 continue
-        embedparam2 = discord.Embed(title='Next IAS sent to :white_check_mark:', description=' '.join(sent), color=0x0addd7)
+        embedparam2 = discord.Embed(title='Next IAS sent to :white_check_mark:', description=' '.join(sent),
+                                    color=0x0addd7)
         if len(failed) != 0:
             embedparam2.add_field(name='Failed :no_entry_sign:', value=' '.join(failed))
         await bot.get_channel(DEVELOPER_PRIVATE_CHANNEL).send(embed=embedparam2)
+
+    elif message.content.startswith('--resend') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
+        called_once_a_day()
 
     elif message.content.startswith(
             '--send_msg') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
