@@ -51,7 +51,11 @@ def hindu():
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
         res = requests.get('https://dailyepaper.in/the-hindu-pdf-free-download-' + d + '-' + m + '-' + y, headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
-        url2 = soup.find_all('a')[16].get('href')
+        urls = soup.find_all('a')
+        for i in urls:
+            if i.getText() == 'Download':
+                url2 = i.get('href')
+                break
     except:
         url2 = ''
 
