@@ -41,7 +41,7 @@ def hindu():
         soup = BeautifulSoup(res.text, 'html.parser')
         urls = soup.find_all('a')
         for i in urls:
-            if i.getText() == 'Download':
+            if i.getText() == 'Download' or i.getText() == 'Download ':
                 url1 = i.get('href')
                 break
     except:
@@ -57,7 +57,7 @@ def hindu():
         soup = BeautifulSoup(res.text, 'html.parser')
         urls = soup.find_all('a')
         for i in urls:
-            if i.getText() == 'Download ':
+            if i.getText() == 'Download' or i.getText() == 'Download ':
                 url2 = i.get('href')
                 break
     except:
