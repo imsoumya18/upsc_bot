@@ -2,7 +2,7 @@
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
-# Discord Bot for Daily The Hindu, Monthly Vision IAS & Next IAS PDF
+# Discord Bot for Daily The Hindu, Monthly Vision IAS, Next IAS & Insights IAS PDF
 
 **TO BE HONEST,**<br>I've built this bot primarily for my own UPSC preparation and thought why not sharing with you guys?🤔
 
