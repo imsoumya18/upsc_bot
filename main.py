@@ -6,23 +6,23 @@ from datetime import datetime, date, time, timedelta
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-TOKEN = 'ODQzNTU1NjkzMjA1NTIwNDM0.YKFkdQ.vCM6hkUkgWJi5QBpUFXnuAd-bCo'  # Bot Token
-DEVELOPER_ID = 832576008149794818  # Your Own ID
-DEVELOPER_PRIVATE_CHANNEL = 847856568581357578  # Developer's Private Channel ID
-PUSH_LOGS_CHANNEL = 845113175561076827  # Push Logs Channel ID
-DEVELOPER_SEND_CHANNEL = 853513928808857650  # Developer's Send Channel ID
-REQUEST_CHANNEL = 901463536025362503  # Add Requests Channel
-COUNTDOWN_CHANNEL = 890276840982327356  # Countdown Channel ID
-THE_HINDU_CHANNELS = [845113175561076827, 906010338212847637, 906010376225837137]  # The Hindu Channel IDs
-VISION_IAS_CHANNELS = [845113175561076827, 906010338212847637, 906010376225837137]  # Vision IAS Channel IDs
-NEXT_IAS_CHANNELS = [845113175561076827, 906010338212847637, 906010376225837137]  # Next IAS Channel IDs
-INSIGHTS_IAS_CHANNELS = [845113175561076827, 906010338212847637, 906010376225837137]  # Insights IAS Channel IDs
+TOKEN = 'TOKEN(str)'  # Bot Token
+DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
+DEVELOPER_PRIVATE_CHANNEL = 'DEVELOPER_PRIVATE_CHANNEL_ID(int)'  # Developer's Private Channel ID
+PUSH_LOGS_CHANNEL = 'PUSH_LOGS_CHANNEL_ID(int)'  # Push Logs Channel ID
+DEVELOPER_SEND_CHANNEL = 'DEVELOPER_SEND_CHANNEL_ID(int)'  # Developer's Send Channel ID
+REQUEST_CHANNEL = 'ADD_REQUESTS_CHANNEL_ID(int)'  # Add Requests Channel
+COUNTDOWN_CHANNEL = 'COUNTDOWN_CHANNEL_ID(int)'  # Countdown Channel ID
+THE_HINDU_CHANNELS = ['LIST OF THE HINDU CHANNEL IDS(int)']  # The Hindu Channel IDs
+VISION_IAS_CHANNELS = ['LIST OF VISION IAS CHANNEL IDS(int)']  # Vision IAS Channel IDs
+NEXT_IAS_CHANNELS = ['LIST OF NEXT IAS CHANNEL IDS(int)']  # Next IAS Channel IDs
+INSIGHTS_IAS_CHANNELS = ['LIST OF INSIGHTS IAS CHANNEL IDS(int)']  # Insights IAS Channel IDs
 WHEN = (datetime.combine(date.today(), time(7, 00, 00)) + timedelta(hours=-5, minutes=-30)).time()  # IST Time
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/spreadsheets',
          'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
 client = gspread.authorize(creds)
-secret_sheet = client.open('Way To Mussoorie').worksheet('Don\'t Touch')
+secret_sheet = client.open('File Name').worksheet('Sheet Name')
 
 bot = discord.Client()
 
@@ -36,7 +36,7 @@ def hindu():
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
         res = requests.get('https://dailyepaper.in/home-point', headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
-        th_page = soup.find_all('tbody')[1].find('a').get('href')
+        th_page = soup.find_all('tbody')[0].find('a').get('href')
         res = requests.get(th_page, headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
         urls = soup.find_all('a')
@@ -52,7 +52,7 @@ def hindu():
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
         res = requests.get('https://dailyepaper.in/home-point', headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
-        th_page = soup.find_all('tbody')[1].find('a').get('href')
+        th_page = soup.find_all('tbody')[0].find('a').get('href')
         res = requests.get(th_page, headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
         urls = soup.find_all('a')
