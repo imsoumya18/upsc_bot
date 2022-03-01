@@ -32,11 +32,12 @@ def hindu():
         list(map(str, [datetime.today().day, datetime.today().month, datetime.today().year])))
 
     try:
+        url1 = ''
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
         res = requests.get('https://dailyepaper.in/home-point', headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
-        th_page = soup.find_all('tbody')[1].find('a').get('href')
+        th_page = soup.find_all('tbody')[0].find('a').get('href')
         res = requests.get(th_page, headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
         urls = soup.find_all('a')
@@ -48,6 +49,7 @@ def hindu():
         url1 = ''
 
     try:
+        url2 = ''
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
         res = requests.get('https://dailyepaper.in/home-point', headers=headers)
