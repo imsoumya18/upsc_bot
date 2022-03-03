@@ -14,7 +14,7 @@
 
 ### 🔗 To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=534723950656&scope=bot)
 
-### 🎯 Server count: `38`
+### 🎯 Server count: `39`
 
 ### जय हिन्द
 <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/313/flag-india_1f1ee-1f1f3.png" alt="Indian Flag" width="25" height="25">
