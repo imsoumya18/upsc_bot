@@ -352,16 +352,14 @@ async def on_message(message):
         await message.channel.send('--pong')
 
     elif message.content.lower() == '--servers' and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_PRIVATE_CHANNEL:
-        # servers = []
-        i = 0
+        i = 1
         async for guild in bot.fetch_guilds(limit=150):
-            embedparam = discord.Embed(title=str(i + 1) + '. ' + repr(guild.name), description='Id: ' + repr(guild.id),
+            embedparam = discord.Embed(title=str(i) + '. ' + repr(guild.name), description='Id: ' + repr(guild.id),
                                        color=0x0addd7)
             await message.channel.send(embed=embedparam)
             i += 1
-            # servers.append(str(i + 1) + '. ' + repr(guild))
-        # embedparam = discord.Embed(title='Server List', description='\n'.join(servers), color=0x0addd7)
-        # await message.channel.send(embed=embedparam)
+        embedparam = discord.Embed(title='Complete', description='Total Servers: ' + str(i - 1), color=0x0addd7)
+        await message.channel.send(embed=embedparam)
 
     elif message.content.startswith(
             '--send_hindu') and message.author.id == DEVELOPER_ID and message.channel.id == DEVELOPER_SEND_CHANNEL:
