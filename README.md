@@ -8,7 +8,9 @@
 
 **HOWEVER,**<br>If you are preparing for UPSC Civil Service Examination too, then you know the significance of daily newspapers and monthly magazines, as these carry a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspapers, magazines by visiting some websites. Why to waste time searching on Google? Here is a quick solution.
 
-**JUST ADD THIS BOT TO YOUR SERVER & TYPE<br>`--hindu` FOR DAILY THE HINDU NEWSPAPER<br>`--vision` FOR MONTHLY VISION IAS CURRENT AFFAIRS<br>`--next` FOR MONTHLY NEXT IAS MCQ<br>`--insights` FOR MONTHLY INSIGHTS IAS CURRENT AFFAIRS<br>`--help` FOR HELP<br><br>LET'S STUDY SMARTER, NOT ONLY HARDER!!😎**
+**JUST ADD THIS BOT TO YOUR SERVER & TYPE<br>`--hindu` FOR DAILY THE HINDU NEWSPAPER<br>`--vision` FOR MONTHLY VISION IAS CURRENT AFFAIRS<br>`--next` FOR MONTHLY NEXT IAS MCQ<br>`--insights` FOR MONTHLY INSIGHTS IAS CURRENT AFFAIRS<br>`--help` FOR HELP<br>
+
+LET'S STUDY SMARTER, NOT ONLY HARDER!!😎**
 
 **CURRENTLY, THE BOT IS SENDING THE HINDU DAILY, VISION IAS & NEXT IAS CURRENT AFFAIRS MONTHLY AUTOMATICALLY WITHOUT THE NEED OF ANY COMMAND @8:00 AM IST TO SOME SPECIFIC CHANNELS WHICH ARE ENROLLED. TO ENROLL YOUR CHANNEL FOR THIS AUTOMATIC SCHEDULE, TYPE `--add_hindu`, `--add_vision`, `--add_next`, `--add_insights` FOR THE HINDU, VISION IAS, NEXT IAS, INSIGHTS IAS RESPECTIVELY.**
 
