@@ -31,36 +31,22 @@ def hindu():
         list(map(str, [datetime.today().day, datetime.today().month, datetime.today().year])))
 
     try:
-        url1 = ''
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
-        res = requests.get('https://dailyepaper.in/home-point', headers=headers)
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                          "Chrome/70.0.3538.77 Safari/537.36"}
+        res = requests.get('https://dailyepaper.in/hindu-analysis-notes-in-pdf-download-2022/', headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
-        th_page = soup.find_all('tbody')[0].find('a').get('href')
-        res = requests.get(th_page, headers=headers)
-        soup = BeautifulSoup(res.text, 'html.parser')
-        urls = soup.find_all('a')
-        for i in urls:
-            if i.getText() == 'Download' or i.getText() == 'Download ':
-                url1 = i.get('href')
-                break
+        url1 = soup.find('a', text='Download Now').get('href')
     except:
         url1 = ''
 
     try:
-        url2 = ''
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
-        res = requests.get('https://dailyepaper.in/home-point', headers=headers)
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                          "Chrome/70.0.3538.77 Safari/537.36"}
+        res = requests.get('https://dailyepaper.in/hindu-analysis-notes-in-pdf-download-2022/', headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
-        th_page = soup.find_all('tbody')[1].find('a').get('href')
-        res = requests.get(th_page, headers=headers)
-        soup = BeautifulSoup(res.text, 'html.parser')
-        urls = soup.find_all('a')
-        for i in urls:
-            if i.getText() == 'Download' or i.getText() == 'Download ':
-                url2 = i.get('href')
-                break
+        url2 = soup.find('a', text='Download Now').get('href')
     except:
         url2 = ''
 
@@ -86,7 +72,8 @@ def next_mcq():
 
 def insights_ca():
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                      "Chrome/70.0.3538.77 Safari/537.36"}
     res = requests.get('https://www.insightsonindia.com/tag/current-affairs-monthly-compilations', headers=headers)
     soup = BeautifulSoup(res.text, 'html.parser')
     ele = soup.find('article').find('h2').find('a')
@@ -101,7 +88,6 @@ def insights_ca():
 @bot.event
 async def on_ready():
     print('Started')
-    await bot.get_channel(PUSH_LOGS_CHANNEL).send('Pushed to Heroku just now!!')
 
 
 async def called_once_a_day():
@@ -189,7 +175,7 @@ async def called_once_a_day():
         secret_sheet.insert_row([vals[0]], 3)
 
     # countdown
-    prelims = datetime(2023, 6, 1)
+    prelims = datetime(2023, 5, 28)
     today = datetime.today()
     await bot.get_channel(COUNTDOWN_CHANNEL).edit(name=str((prelims - today).days) + ' days to prelims!')
 
@@ -309,7 +295,8 @@ async def on_message(message):
         embedparam.add_field(name='Server name', value=str(message.author.guild.name))
         await bot.get_channel(REQUEST_CHANNEL).send(embed=embedparam)
         embedparam = discord.Embed(title='Channel Added',
-                                   description='This Hindu will be sent daily in this channel as soon as developer approves',
+                                   description='This Hindu will be sent daily in this channel as soon as developer '
+                                               'approves',
                                    color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
@@ -320,7 +307,8 @@ async def on_message(message):
         embedparam.add_field(name='Server name', value=str(message.author.guild.name))
         await bot.get_channel(REQUEST_CHANNEL).send(embed=embedparam)
         embedparam = discord.Embed(title='Channel Added',
-                                   description='Vision IAS Magazine will be sent monthly in this channel as soon as developer approves',
+                                   description='Vision IAS Magazine will be sent monthly in this channel as soon as '
+                                               'developer approves',
                                    color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
@@ -331,7 +319,8 @@ async def on_message(message):
         embedparam.add_field(name='Server name', value=str(message.author.guild.name))
         await bot.get_channel(REQUEST_CHANNEL).send(embed=embedparam)
         embedparam = discord.Embed(title='Channel Added',
-                                   description='Next IAS MCQ will be sent monthly in this channel as soon as developer approves',
+                                   description='Next IAS MCQ will be sent monthly in this channel as soon as '
+                                               'developer approves',
                                    color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
@@ -343,7 +332,8 @@ async def on_message(message):
         embedparam.add_field(name='Server name', value=str(message.author.guild.name))
         await bot.get_channel(REQUEST_CHANNEL).send(embed=embedparam)
         embedparam = discord.Embed(title='Channel Added',
-                                   description='Insights IAS MCQ will be sent monthly in this channel as soon as developer approves',
+                                   description='Insights IAS MCQ will be sent monthly in this channel as soon as '
+                                               'developer approves',
                                    color=0x0addd7)
         await message.channel.send(embed=embedparam)
 
