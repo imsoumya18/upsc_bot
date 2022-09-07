@@ -16,7 +16,7 @@ THE_HINDU_CHANNELS = ['LIST OF THE HINDU CHANNEL IDS(int)']  # The Hindu Channel
 VISION_IAS_CHANNELS = ['LIST OF VISION IAS CHANNEL IDS(int)']  # Vision IAS Channel IDs
 NEXT_IAS_CHANNELS = ['LIST OF NEXT IAS CHANNEL IDS(int)']  # Next IAS Channel IDs
 INSIGHTS_IAS_CHANNELS = ['LIST OF INSIGHTS IAS CHANNEL IDS(int)']  # Insights IAS Channel IDs
-WHEN = (datetime.combine(date.today(), time(7, 00, 00)) + timedelta(hours=-5, minutes=-30)).time()  # IST Time
+WHEN = (datetime.combine(date.today(), time(8, 00, 00)) + timedelta(hours=-5, minutes=-30)).time()  # IST Time
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/spreadsheets',
          'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
