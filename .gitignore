@@ -129,6 +129,4 @@ dmypy.json
 .pyre/
 .idea
 /creds.json
-/secret.txt
 /test.py
-/test2.py
