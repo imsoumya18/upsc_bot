@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea
-/creds.json
-/test.py
+
+# Custom
+Sandbox/
