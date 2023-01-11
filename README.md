@@ -4,7 +4,12 @@
 
 # Discord Bot for Daily The Hindu, Monthly Vision IAS, Next IAS & Insights IAS PDF
 
-**TO BE HONEST,**<br>I built this bot primarily for my frined's UPSC preparation and thought why not sharing with you guys?🤔
+### 👇👇👇
+### 🚫🚫 THIS BOT IS NOT OPERATING CURRENTLY DUE TO SOME BUGS. WE SHALL BE BACK SOON. PLEASE FILL OUT THIS SURVEY FORM SO THAT WE CAN COME BACK ASAP 🚫🚫
+### https://forms.gle/A9n419j3EY2iSydv7
+### ☝️☝️☝️
+
+**TO BE HONEST,**<br>I built this bot primarily for my frined's UPSC preparation and thought why not sharing with you guys? 🤔
 
 **HOWEVER,**<br>If you are preparing for UPSC Civil Service Examination too, then you know the significance of daily newspapers and monthly magazines, as these carry a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspapers, magazines by visiting some websites. Why to waste time searching on Google? Here is a quick solution.
 
@@ -16,7 +21,7 @@
 
 ### 🔗 To add the bot to your server, click [here.](https://discord.com/api/oauth2/authorize?client_id=842376092505473074&permissions=534723950656&scope=bot)
 
-### 🎯 Server count: `94`
+### 🎯 Server count: `100+`
 
 ### जय हिन्द <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/313/flag-india_1f1ee-1f1f3.png" alt="Indian Flag" width="25" height="25">
 
