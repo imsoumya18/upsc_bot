@@ -1,6 +1,4 @@
 from datetime import datetime, date, time, timedelta
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 
 TOKEN = 'TOKEN(str)'  # Bot Token
 DEVELOPER_ID = 'DEVELOPER_ID(int)'  # Your Own ID
@@ -13,9 +11,3 @@ VISION_IAS_CHANNELS = ['LIST OF VISION IAS CHANNEL IDS(int)']  # Vision IAS Chan
 NEXT_IAS_CHANNELS = ['LIST OF NEXT IAS CHANNEL IDS(int)']  # Next IAS Channel IDs
 INSIGHTS_IAS_CHANNELS = ['LIST OF INSIGHTS IAS CHANNEL IDS(int)']  # Insights IAS Channel IDs
 WHEN = (datetime.combine(date.today(), time(8, 00, 00)) + timedelta(hours=-5, minutes=-30)).time()  # IST Time
-
-scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/spreadsheets',
-         'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
-client = gspread.authorize(creds)
-secret_sheet = client.open('File Name').worksheet('Sheet Name')

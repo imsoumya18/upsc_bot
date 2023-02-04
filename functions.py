@@ -11,7 +11,7 @@ def hindu():
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                           "Chrome/70.0.3538.77 Safari/537.36"}
-        res = requests.get('https://dailyepaper.in/hindu-analysis-notes-in-pdf-download-2022/', headers=headers)
+        res = requests.get('https://dailyepaper.in/hindu-analysis-notes-in-pdf-2023/', headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
         url1 = soup.find('a', text='Download Now').get('href')
     except:
@@ -21,7 +21,7 @@ def hindu():
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                           "Chrome/70.0.3538.77 Safari/537.36"}
-        res = requests.get('https://dailyepaper.in/hindu-analysis-notes-in-pdf-download-2022/', headers=headers)
+        res = requests.get('https://dailyepaper.in/hindu-analysis-notes-in-pdf-2023/', headers=headers)
         soup = BeautifulSoup(res.text, 'html.parser')
         url2 = soup.find('a', text='Download Now').get('href')
     except:
@@ -51,12 +51,12 @@ def insights_ca():
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/70.0.3538.77 Safari/537.36"}
-    res = requests.get('https://www.insightsonindia.com/tag/current-affairs-monthly-compilations', headers=headers)
+    res = requests.get('https://www.insightsonindia.com/tag/current-affairs-monthly-compilations/', headers=headers)
     soup = BeautifulSoup(res.text, 'html.parser')
-    ele = soup.find('article').find('h2').find('a')
-    res = requests.get(ele.get('href'), headers=headers)
+    ele = soup.find('a', attrs={'rel': 'bookmark'})
+    path = ele.get('href')
+    res = requests.get(path, headers=headers)
     soup = BeautifulSoup(res.text, 'html.parser')
-    ele = soup.find_all('h2')[1].find('a')
-    title = ele.getText()
-    url = ele.get('href')
+    title = soup.find('h1', attrs={'class': 'entry-title'}).getText().split(' ', 1)[1].replace(',', ' -')
+    url = soup.find('div', attrs={'class': 'entry-content'}).find('h3').find('a').get('href')
     return [title, url]
