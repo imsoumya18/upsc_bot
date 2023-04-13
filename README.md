@@ -32,4 +32,4 @@ Any type of feedback is appreciated: soumyadeep184@gmail.com
 ![forthebadge hosted-on-heroku](https://img.shields.io/badge/HOSTED_ON-HEROKU-brightgreen)
 
  **SUPPORT ME:**
- - UPI: soumyadeep184@okaxis.com
+ - UPI: soumyadeep184@okaxis
