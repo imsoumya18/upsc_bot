@@ -4,11 +4,6 @@
 
 # Discord Bot for Daily The Hindu, Monthly Vision IAS, Next IAS & Insights IAS PDF
 
-### 👇👇👇
-### 🚫🚫 THIS BOT IS NOT OPERATING CURRENTLY DUE TO SOME BUGS. WE SHALL BE BACK SOON. PLEASE FILL OUT THIS SURVEY FORM SO THAT WE CAN COME BACK ASAP 🚫🚫
-### https://forms.gle/A9n419j3EY2iSydv7
-### ☝️☝️☝️
-
 ### All the issues are now dissolved. You can now install the bot in your server. But, due to hosting and maintenance, THIS SERVICE CAN NO MRE REMAIN FREE.
 ### Still some issues are there in daily The Hindu sending. So, we are keeping that FREE.
 ### But, for Vision IAS, Next IAS and Insights IAS I am bound to charge A NOMINAL ONE-TIME FEE OF ₹50 FOR LIFETIME.
