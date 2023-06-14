@@ -8,13 +8,6 @@
 ### Still some issues are there in daily The Hindu sending. So, we are keeping that FREE.
 ### But, for Vision IAS, Next IAS and Insights IAS I am bound to charge A NOMINAL ONE-TIME FEE OF ₹50 FOR LIFETIME.
 
-Here are the steps to follow:
-1. Add this bot in your server.
-2. Copy the Server ID and store it somewhere ([how to find server ID?](https://www.alphr.com/discord-find-server-id/)).
-3. Send ₹50 to **soumyadeep184@okaxis** and take a screenshot
-4. DM the SCREENSHOT & the SERVER ID to my Discord: imsoumya18#4741
-5. Once I check, I shall approve it.
-
 **TO BE HONEST,**<br>I built this bot primarily for my frined's UPSC preparation and thought why not sharing with you guys? 🤔
 
 **HOWEVER,**<br>If you are preparing for UPSC Civil Service Examination too, then you know the significance of daily newspapers and monthly magazines, as these carry a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspapers, magazines by visiting some websites. Why to waste time searching on Google? Here is a quick solution.
