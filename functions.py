@@ -60,3 +60,5 @@ def insights_ca():
     title = soup.find('h1', attrs={'class': 'entry-title'}).getText().split(' ', 1)[1].replace(',', ' -')
     url = soup.find('div', attrs={'class': 'entry-content'}).find('h3').find('a').get('href')
     return [title, url]
+
+
