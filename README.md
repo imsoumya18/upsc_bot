@@ -24,7 +24,7 @@
 
 ### 🎯 Server count: `100+`
 
-### जय हिन्द <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/313/flag-india_1f1ee-1f1f3.png" alt="Indian Flag" width="25" height="25">
+### जय हिन्द :india:
 
 Any type of feedback is appreciated: soumyadeep184@gmail.com
 
