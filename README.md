@@ -1,6 +1,6 @@
 <img src="https://github.com/imsoumya18/upsc_bot/blob/main/assets/UPSC.jpg" alt="UPSC Logo" width="1000" height="360">
 
-[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
 # Discord Bot for Daily The Hindu, Monthly Vision IAS, Next IAS & Insights IAS PDF
 
