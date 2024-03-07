@@ -4,10 +4,6 @@
 
 # Discord Bot for Daily The Hindu, Monthly Vision IAS, Next IAS & Insights IAS PDF
 
-### All the issues are now dissolved. You can now install the bot in your server. But, due to hosting and maintenance, THIS SERVICE CAN NO MRE REMAIN FREE.
-### Still some issues are there in daily The Hindu sending. So, we are keeping that FREE.
-### But, for Vision IAS, Next IAS and Insights IAS I am bound to charge A NOMINAL ONE-TIME FEE OF ₹50 FOR LIFETIME.
-
 **TO BE HONEST,**<br>I built this bot primarily for my frined's UPSC preparation and thought why not sharing with you guys? 🤔
 
 **HOWEVER,**<br>If you are preparing for UPSC Civil Service Examination too, then you know the significance of daily newspapers and monthly magazines, as these carry a major weightage in Current Affairs section. And like most of the aspirants, you too probably download the PDFs of the newspapers, magazines by visiting some websites. Why to waste time searching on Google? Here is a quick solution.
