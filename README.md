@@ -27,6 +27,3 @@ Any type of feedback is appreciated: soumyadeep184@gmail.com
 ![forthebadge made-by-soumya](https://img.shields.io/badge/CREATED_BY-SOUMYA-blue)
 
 ![forthebadge hosted-on-heroku](https://img.shields.io/badge/HOSTED_ON-AWS-brightgreen)
-
- **SUPPORT ME:**
- - UPI: soumyadeep184@okaxis
